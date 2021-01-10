@@ -1,0 +1,14 @@
+.invalidInput {
+    border: 1px solid red;
+    background-color: rgb(250, 154, 154);
+}
+
+.signupSuccess {
+    color: green;
+    text-align: center;
+}
+
+.signupError {
+    color: red;
+    text-align: center;
+}
