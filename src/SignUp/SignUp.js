@@ -34,7 +34,7 @@ class SignUp extends Component {
                 'country': this.state.nationality
             };
 
-            fetch('http://192.168.0.13:3010/signup/', {
+            fetch('https://backend.isdaracing.com/signup/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
