@@ -26,10 +26,6 @@ class RaceResults extends Component {
     }
 
     render() {
-        
-        this.getAvailableRaceResults();
-        this.getRaceResults('ACC_Pcup_S0_hungaroring');
-
         let raceResultsTable = null;
         if (this.state.results.length > 0) {
             let positionCounter = 0;
