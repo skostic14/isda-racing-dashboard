@@ -35,7 +35,6 @@ class RaceResults extends Component {
         if (this.state.available_race_results.length > 0) {
             let availableRacesArray = []
             this.state.available_race_results.map((race) => {
-                console.log(race);
                 return availableRacesArray.push({
                     value: race['id'],
                     label: race['name']
