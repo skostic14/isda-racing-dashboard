@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import Select from 'react-select';
 import './RaceResults.css';
 import CarPosition from './CarPosition.js';
 
@@ -13,6 +14,10 @@ class RaceResults extends Component {
         }
     }
 
+    componentDidMount() {
+        this.getAvailableRaceResults();
+    }
+
     getAvailableRaceResults = () => {
         fetch('https://backend.isdaracing.com/get_available_race_results/')
         .then( response => response.json())
@@ -20,12 +25,27 @@ class RaceResults extends Component {
     }
 
     getRaceResults = (raceID) =>  {
-        fetch('https://backend.isdaracing.com/get_race_results?id=' + raceID + '&session=r').
+        console.log(raceID['value']);
+        fetch('https://backend.isdaracing.com/get_race_results?id=' + raceID['value'] + '&session=r').
             then(response => response.json()).
             then(data => this.setState({current_race_data: data['race_data'], results: data['results']}));
     }
 
     render() {
+        let availableRaceResults = null;
+        if (this.state.available_race_results.length > 0) {
+            let availableRacesArray = []
+            this.state.available_race_results.map((race) => {
+                console.log(race);
+                return availableRacesArray.push({
+                    value: race['id'],
+                    label: race['name']
+                });
+            });
+
+            availableRaceResults = (<Select options={availableRacesArray} onChange={this.getRaceResults}/>)
+        }
+
         let raceResultsTable = null;
         if (this.state.results.length > 0) {
             let positionCounter = 0;
@@ -55,6 +75,7 @@ class RaceResults extends Component {
         return (
             <div>
                 <h1>Race results</h1>
+                {availableRaceResults}
                 {raceResultsTable}
             </div>
         )
