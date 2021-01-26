@@ -41,7 +41,7 @@ class RaceResults extends Component {
                 });
             });
 
-            availableRaceResults = (<Select options={availableRacesArray} onChange={this.getRaceResults}/>)
+            availableRaceResults = (<Select className="RaceSelect" options={availableRacesArray} onChange={this.getRaceResults} placeholder="Select race from the drop-down menu"/>)
         }
 
         let raceResultsTable = null;
@@ -49,7 +49,7 @@ class RaceResults extends Component {
             let positionCounter = 0;
             raceResultsTable = (
                 <table>
-                    <tr>
+                    <tr className="ResultsTableHeader">
                         <td>Position</td>
                         <td>Driver</td>
                         <td>Car number</td>
@@ -71,8 +71,7 @@ class RaceResults extends Component {
         }
 
         return (
-            <div>
-                <h1>Race results</h1>
+            <div className="RaceResults">
                 {availableRaceResults}
                 {raceResultsTable}
             </div>

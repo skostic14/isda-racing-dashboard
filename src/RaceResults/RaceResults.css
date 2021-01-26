@@ -1,0 +1,37 @@
+.RaceResults {
+    width: 100em;
+    height: fit-content;
+    align-content: center;
+    padding: 1rem;
+}
+
+.RaceSelect {
+    align-self: center;
+    text-align-last: center;
+    margin-left: 25em;
+    width: 50em;
+}
+
+.ResultsTableHeader {
+    font-weight: bold;
+    text-transform: uppercase;
+    background-color: #e54747;
+    color: white;
+}
+
+table {
+    margin-top: 1em;
+    width: inherit;
+    align-self: center;
+    border-collapse: collapse;
+    font-family: monospace;
+    font-size: 17px;
+}
+
+tr {
+    background-color: rgb(177, 177, 177);
+    height: 2.3rem;
+}
+tr:nth-child(even) {
+    background-color: lightgray;
+}
