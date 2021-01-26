@@ -48,7 +48,7 @@ class RaceResults extends Component {
         if (this.state.results.length > 0) {
             let positionCounter = 0;
             raceResultsTable = (
-                <table>
+                <table className="ResultsTable">
                     <tr className="ResultsTableHeader">
                         <td>Position</td>
                         <td>Driver</td>

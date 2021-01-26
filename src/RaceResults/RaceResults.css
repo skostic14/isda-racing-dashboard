@@ -12,14 +12,14 @@
     width: 50em;
 }
 
-.ResultsTableHeader {
+.ResultsTable > .ResultsTableHeader {
     font-weight: bold;
     text-transform: uppercase;
     background-color: #e54747;
     color: white;
 }
 
-table {
+.ResultsTable {
     margin-top: 1em;
     width: inherit;
     align-self: center;
@@ -28,10 +28,11 @@ table {
     font-size: 17px;
 }
 
-tr {
+.ResultsTable > tr {
     background-color: rgb(177, 177, 177);
     height: 2.3rem;
 }
-tr:nth-child(even) {
+
+.ResultsTable > tr:nth-child(even) {
     background-color: lightgray;
 }
