@@ -15,8 +15,7 @@ class Calendar extends Component {
     }
 
     getUpcomingRaces = () => {
-        //fetch('https://backend.isdaracing.com/get_upcoming_races/')
-        fetch('http://localhost:3010/get_upcoming_races/')
+        fetch('https://backend.isdaracing.com/get_upcoming_races/')
         .then( response => response.json())
         .then( data => this.setState({upcoming_races: data['races']}));
     }
