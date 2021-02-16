@@ -22,14 +22,12 @@ class SeasonStandings extends Component {
 
     getAvailableSeasons = () => {
         fetch('https://backend.isdaracing.com/get_available_seasons/')
-        //fetch('http://localhost:3010/get_available_seasons/')
             .then( response => response.json())
             .then( data => this.setState({available_seasons: data['seasons']}));
     }
 
     getSeasonResults = (seasonID) =>  {
         fetch('https://backend.isdaracing.com/get_season_standings?id=' + seasonID['value'])
-        //fetch('http://localhost:3010/get_season_standings?id=' + seasonID['value'])
             .then(response => response.json())
             .then(data => this.setState({driver_standings: data['driver_standings'], races: data['races'], team_standings: data['team_standings']}));
     }

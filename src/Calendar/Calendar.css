@@ -1,0 +1,69 @@
+.RaceResults {
+    width: 100em;
+    height: fit-content;
+    align-content: center;
+    padding: 1rem;
+}
+
+.RaceSelect {
+    align-self: center;
+    text-align-last: center;
+    margin-left: 25%;
+    width: 50%;
+}
+
+.StandingsSelect {
+    align-self: center;
+    text-align-last: center;
+    margin-left: 40%;
+    margin-top: 1em;
+    width: 20%;
+}
+
+.ResultsTable > .ResultsTableHeader {
+    font-weight: bold;
+    text-transform: uppercase;
+    background-color: #e54747;
+    color: white;
+}
+
+h2 {
+    font-family: monospace;
+    font-size: 20px;
+    text-transform: uppercase;
+}
+
+.ResultsTable {
+    width: inherit;
+    align-self: center;
+    border-collapse: collapse;
+    font-family: monospace;
+    font-size: 17px;
+    margin-top: 1em;
+}
+
+.ResultsTable > tr {
+    background-color: rgb(255, 255, 255);
+    height: 2.3rem;
+}
+
+.ResultsTable > tr:nth-child(even) {
+    background-color: rgb(235, 235, 235);
+}
+
+.firstPosition {
+    background-color: gold;
+}
+
+.secondPosition {
+    background-color: silver;
+}
+
+.thirdPosition {
+    background-color: rgb(221, 188, 2);
+}
+
+.DSQ {
+    background-color: black;
+    color: white;
+}
