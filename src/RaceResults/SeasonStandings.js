@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import Select from 'react-select';
 import './RaceResults.css';
-//import './SeasonStandings.css'
 import DriverStanding from './DriverStanding.js';
 
 class SeasonStandings extends Component {
@@ -29,7 +28,7 @@ class SeasonStandings extends Component {
     }
 
     getSeasonResults = (seasonID) =>  {
-        fetch('https://backend.isdaracing.com/get_season_standings?id=' + seasonID['value']).
+        fetch('https://backend.isdaracing.com/get_season_standings?id=' + seasonID['value'])
         //fetch('http://localhost:3010/get_season_standings?id=' + seasonID['value'])
             .then(response => response.json())
             .then(data => this.setState({driver_standings: data['driver_standings'], races: data['races'], team_standings: data['team_standings']}));
