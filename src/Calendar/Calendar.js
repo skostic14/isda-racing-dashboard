@@ -32,7 +32,6 @@ class Calendar extends Component {
                         <td>Track</td>
                         <td>Q</td>
                         <td>R</td>
-                        <td></td>
                     </tr>
                     {
                         this.state.upcoming_races.map((race) => {
@@ -57,7 +56,6 @@ class Calendar extends Component {
                                     <td>{race['track']}</td>
                                     <td>{qualyDuration}</td>
                                     <td>{raceDuration}</td>
-                                    <td>Click here to join kurwa</td>
                                 </tr>
                             );
                         })
