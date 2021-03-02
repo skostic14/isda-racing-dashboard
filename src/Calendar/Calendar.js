@@ -64,7 +64,7 @@ class Calendar extends Component {
             )
         }
         return (
-            <div className="RaceResults">
+            <div className="Standings">
                 <h2>Upcoming races</h2>
                 {upcomingRaceList}
             </div>

@@ -11,6 +11,7 @@ class SignUp extends Component {
             nickname: '',
             steamid: '',
             nationality: '',
+            discordid: '',
             showErrors: false,
             showSignUpResponse: true,
             signUpCode: -1,
@@ -31,7 +32,8 @@ class SignUp extends Component {
                 'surname': this.state.surname,
                 'nickname': this.state.nickname,
                 'steamid': this.state.steamid,
-                'country': this.state.nationality
+                'country': this.state.nationality,
+                'discordid': this.state.discordid
             };
 
             fetch('https://backend.isdaracing.com/signup/', {
@@ -74,6 +76,12 @@ class SignUp extends Component {
         if (this.state.nationality.length !== 2) {
             return false;
         }
+        if (this.state.discordid.length < 1) {
+            return false;
+        }
+        if (!(this.state.discordid.includes('#'))) {
+            return false;
+        }
 
         return true;
     }
@@ -97,6 +105,7 @@ class SignUp extends Component {
         let nicknameClass = [];
         let steamIDClass = [];
         let countryClass = [];
+        let discordIDClass = [];
 
         if (this.state.showErrors) {
             if (this.state.name.length < 1) {
@@ -110,6 +119,9 @@ class SignUp extends Component {
             }
             if (this.state.steamid.length !== 17) {
                 steamIDClass.push('invalidInput');
+            }
+            if (this.state.discordid.length < 5 || !(this.state.discordid.includes('#'))) {
+                discordIDClass.push('invalidInput');
             }
             if (this.state.nationality.length !== 2) {
                 countryClass.push('invalidInput');
@@ -125,7 +137,6 @@ class SignUp extends Component {
             else {
                 signupMessageClass.push('signupError');
             }
-            console.log(this.state.signUpMessage)
             signupMessage = (<tr><td><p className={signupMessageClass}>{this.state.signUpMessage}</p></td></tr>);
         }
         
@@ -163,6 +174,14 @@ class SignUp extends Component {
                                 </td>
                             <td>
                                 <input className={steamIDClass} type="text" name="steamid" onChange={this.handleChange}></input>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>Discord ID(e.g. ISDA#0101):</p>
+                                </td>
+                            <td>
+                                <input className={discordIDClass} type="text" name="discordid" onChange={this.handleChange}></input>
                             </td>
                         </tr>
                         <tr>

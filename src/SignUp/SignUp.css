@@ -12,3 +12,9 @@
     color: red;
     text-align: center;
 }
+
+input {
+    height: 1.5em;
+    width: 20em;
+}
+

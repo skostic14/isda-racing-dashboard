@@ -1,30 +1,8 @@
-.RaceResults {
+.Standings {
     width: 100em;
     height: fit-content;
     align-content: center;
     padding: 1rem;
-}
-
-.RaceSelect {
-    align-self: center;
-    text-align-last: center;
-    margin-left: 25%;
-    width: 50%;
-}
-
-.StandingsSelect {
-    align-self: center;
-    text-align-last: center;
-    margin-left: 40%;
-    margin-top: 1em;
-    width: 20%;
-}
-
-.ResultsTable > .ResultsTableHeader {
-    font-weight: bold;
-    text-transform: uppercase;
-    background-color: #e54747;
-    color: white;
 }
 
 h2 {
@@ -49,21 +27,4 @@ h2 {
 
 .ResultsTable > tr:nth-child(even) {
     background-color: rgb(235, 235, 235);
-}
-
-.firstPosition {
-    background-color: gold;
-}
-
-.secondPosition {
-    background-color: silver;
-}
-
-.thirdPosition {
-    background-color: rgb(221, 188, 2);
-}
-
-.DSQ {
-    background-color: black;
-    color: white;
 }
