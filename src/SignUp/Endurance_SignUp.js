@@ -38,7 +38,6 @@ class EnduranceTeamSignUp extends Component {
     }
 
     handleDriverSelect = (driver, index) => {
-        console.log('Driver select ' + driver.value);
         let current_driver_list = this.state.drivers;
         current_driver_list[index] = driver.value;
         this.setState({drivers: current_driver_list})
@@ -158,7 +157,6 @@ class EnduranceTeamSignUp extends Component {
                         label: driver['real_name']
                 })
             });
-            console.log(this.state.driverList)
             driverSelect = (<Select className="DriverSelect" options={driverOptions} placeholder="Select driver"/>);
         }
 
