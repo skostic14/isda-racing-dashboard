@@ -2,16 +2,16 @@ import React, {Component} from 'react';
 import Select from 'react-select';
 import './SignUp.css';
 
-class EnduranceTeamSignUp extends Component {
+class EnduranceTeamUpdate extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            'availableSeasons': [],
             'registeredTeams': [],
             'carOptions': [],
             'driverList': [],
             'season': 'ACC_OneOff_Misano8h',
+            'team_id': '',
             'teamname': '',
             'car': '',
             'carNumber': 0,
@@ -28,7 +28,8 @@ class EnduranceTeamSignUp extends Component {
 
     componentDidMount() {
         this.getActiveDrivers();
-        this.getCarOptions(this.state.season)
+        this.getCarOptions(this.state.season);
+        this.getRegisteredTeams(this.state.season);
     }
 
     handleChange = (event) => {
@@ -43,6 +44,32 @@ class EnduranceTeamSignUp extends Component {
         this.setState({drivers: current_driver_list})
     }
 
+    handleTeamSelect = (team) => {
+        const selectedTeam = this.state.registeredTeams.find(function(v) { return v['id'] === team.value});
+        let driverList = ['', '', '', ''];
+        if (selectedTeam['drivers'].length > 0) {
+            driverList[0] = selectedTeam['drivers'][0]['name'];
+        }
+        if (selectedTeam['drivers'].length > 1) {
+            driverList[1] = selectedTeam['drivers'][1]['name'];
+        }
+        if (selectedTeam['drivers'].length > 2) {
+            driverList[2] = selectedTeam['drivers'][2]['name'];
+        }
+        if (selectedTeam['drivers'].length > 3) {
+            driverList[3] = selectedTeam['drivers'][3]['name'];
+        }
+        this.setState({
+            'teamname': selectedTeam['team_name'],
+            'team_id': selectedTeam['id'],
+            'car': selectedTeam['car_name'],
+            'carNumber': selectedTeam['entry_number'],
+            'drivers': driverList,
+            'country': '',
+            'pin': 0
+        });
+    }
+
     handleCarSelect = (car) => {
         this.setState({car: car.value})
     }
@@ -51,6 +78,7 @@ class EnduranceTeamSignUp extends Component {
         if (this.validateData()) {
             const teamData = {
                 'season': this.state.season,
+                'team_id': this.state.team_id,
                 'teamname': this.state.teamname,
                 'car': this.state.car,
                 'car_number': this.state.carNumber,
@@ -59,10 +87,7 @@ class EnduranceTeamSignUp extends Component {
                 'pin': this.state.pin
             };
 
-            let link = 'http://localhost:3010/team_signup';
-            if (this.state.update) {
-                link = 'http://localhost:3010/team_update/';
-            }
+            let link = 'https://backend.isdaracing.com/team_update';
 
             fetch(link, {
                 method: 'POST',
@@ -85,19 +110,19 @@ class EnduranceTeamSignUp extends Component {
     }
 
     getRegisteredTeams = (season) => {
-        fetch('http://localhost:3010/get_registered_teams?season=' + season)
+        fetch('https://backend.isdaracing.com/get_registered_teams?season=' + season)
         .then( response => response.json())
         .then( data => this.setState({registeredTeams: data['teams']}));
     }
 
     getCarOptions = (season) => {
-        fetch('http://localhost:3010/get_car_options?season=' + season)
+        fetch('https://backend.isdaracing.com/get_car_options?season=' + season)
         .then( response => response.json())
         .then( data => this.setState({carOptions: data['cars']}));
     }
 
     getActiveDrivers = () => {
-        fetch('http://localhost:3010/get_active_drivers')
+        fetch('https://backend.isdaracing.com/get_active_drivers')
         .then( response => response.json())
         .then( data => this.setState({driverList: data['drivers']}));
     }
@@ -136,7 +161,7 @@ class EnduranceTeamSignUp extends Component {
         let carNumberClass = [];
         let pinClass = [];
 
-        let carSelect = [];
+        let carSelect = null;
         if (this.state.carOptions.length > 0) {
             let carOptions = [];
             this.state.carOptions.map((car) => {
@@ -145,10 +170,10 @@ class EnduranceTeamSignUp extends Component {
                     label: car['friendly_name']
                 })
             })
-            carSelect = (<Select className="CarSelect" options={carOptions} onChange={this.handleCarSelect} placeholder="Select car"/>);
+            carSelect = (<Select className="CarSelect" options={carOptions} onChange={this.handleCarSelect} value={carOptions.filter(option => option.label === this.state.car)} placeholder="Select car"/>);
         }
 
-        let driverSelect = [];
+        let driverSelect = null;
         let driverOptions = [];
         if (this.state.driverList.length > 0) {
             this.state.driverList.map((driver) => {
@@ -157,10 +182,9 @@ class EnduranceTeamSignUp extends Component {
                         label: driver['real_name']
                 })
             });
-            driverSelect = (<Select className="DriverSelect" options={driverOptions} placeholder="Select driver"/>);
         }
 
-        let seasonSelect = [];
+        /*let seasonSelect = [];
         if (this.state.availableSeasons.length > 0) {
             let availableSeasons = []
             this.state.availableSeasons.map((season) => {
@@ -169,7 +193,19 @@ class EnduranceTeamSignUp extends Component {
                     label: season['friendly_name']
                 })
             })
-            carSelect = (<Select className="CarSelect" options={availableSeasons} placeholder="Select season"/>)
+            seasonSelect = (<Select className="CarSelect" options={availableSeasons} placeholder="Select season"/>)
+        }*/
+
+        let teamSelect = [];
+        if (this.state.registeredTeams.length > 0) {
+            let availableTeams = [];
+            this.state.registeredTeams.map((team) => {
+                return availableTeams.push({
+                    value: team['id'],
+                    label: team['team_name']
+                })
+            })
+            teamSelect = (<Select className="DriverSelect" options={availableTeams} onChange={this.handleTeamSelect} placeholder="Select team to edit"/>)
         }
 
         if (this.state.showErrors) {
@@ -202,10 +238,10 @@ class EnduranceTeamSignUp extends Component {
                     <tbody>
                         <tr>
                             <td>
-                                <p>Team name</p>
+                                <p>Team to edit</p>
                                 </td>
                             <td>
-                                <input className={nameClass} type="text" name="teamname" onChange={this.handleChange}></input>
+                                {teamSelect}
                             </td>
                         </tr>
                         <tr>
@@ -221,7 +257,7 @@ class EnduranceTeamSignUp extends Component {
                                 <p>Car number</p>
                                 </td>
                             <td>
-                                <input className={carNumberClass} type="number" name="carNumber" onChange={this.handleChange}></input>
+                                <input className={carNumberClass} type="number" name="carNumber" onChange={this.handleChange} value={this.state.carNumber}></input>
                             </td>
                         </tr>
                         <tr>
@@ -229,7 +265,7 @@ class EnduranceTeamSignUp extends Component {
                                 <p>Driver 1</p>
                                 </td>
                             <td>
-                                <Select className="DriverSelect" options={driverOptions} onChange={(e) => this.handleDriverSelect(e, 0)} placeholder="Select driver"/>
+                                <Select className="DriverSelect" options={driverOptions} onChange={(e) => this.handleDriverSelect(e, 0)} value={driverOptions.filter(option => option.label === this.state.drivers[0])} placeholder="Select driver"/>
                             </td>
                         </tr>
                         <tr>
@@ -237,7 +273,7 @@ class EnduranceTeamSignUp extends Component {
                                 <p>Driver 2</p>
                                 </td>
                             <td>
-                                <Select className="DriverSelect" options={driverOptions} onChange={(e) => this.handleDriverSelect(e, 1)} placeholder="Select driver"/>
+                                <Select className="DriverSelect" options={driverOptions} onChange={(e) => this.handleDriverSelect(e, 1)} value={driverOptions.filter(option => option.label === this.state.drivers[1])} placeholder="Select driver"/>
                             </td>
                         </tr>
                         <tr>
@@ -245,7 +281,7 @@ class EnduranceTeamSignUp extends Component {
                                 <p>Driver 3</p>
                                 </td>
                             <td>
-                                <Select className="DriverSelect" options={driverOptions} onChange={(e) => this.handleDriverSelect(e, 2)} placeholder="Select driver"/>
+                                <Select className="DriverSelect" options={driverOptions} onChange={(e) => this.handleDriverSelect(e, 2)} value={driverOptions.filter(option => option.label === this.state.drivers[2])} placeholder="Select driver"/>
                             </td>
                         </tr>
                         <tr>
@@ -253,7 +289,7 @@ class EnduranceTeamSignUp extends Component {
                                 <p>Driver 4</p>
                                 </td>
                             <td>
-                                <Select className="DriverSelect" options={driverOptions} onChange={(e) => this.handleDriverSelect(e, 3)} placeholder="Select driver"/>
+                                <Select className="DriverSelect" options={driverOptions} onChange={(e) => this.handleDriverSelect(e, 3)} value={driverOptions.filter(option => option.label === this.state.drivers[3])} placeholder="Select driver"/>
                             </td>
                         </tr>
                         <tr>
@@ -264,7 +300,7 @@ class EnduranceTeamSignUp extends Component {
                                 <input className={pinClass} type="number" name="pin" onChange={this.handleChange}></input>
                             </td>
                         </tr>
-                        <tr><td></td><td><button onClick={this.handleSubmit}>Submit</button></td></tr>
+                        <tr><td></td><td><button onClick={this.handleSubmit}>Confirm changes</button></td></tr>
                         
                     </tbody>
                 </table>
@@ -274,4 +310,4 @@ class EnduranceTeamSignUp extends Component {
     }
 }
 
-export default EnduranceTeamSignUp;
+export default EnduranceTeamUpdate;
