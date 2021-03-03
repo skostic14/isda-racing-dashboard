@@ -76,7 +76,7 @@ class SignUp extends Component {
         if (this.state.nationality.length !== 2) {
             return false;
         }
-        if (this.state.discordid.length < 1) {
+        if (this.state.discordid.length < 6) {
             return false;
         }
         if (!(this.state.discordid.includes('#'))) {
@@ -120,7 +120,7 @@ class SignUp extends Component {
             if (this.state.steamid.length !== 17) {
                 steamIDClass.push('invalidInput');
             }
-            if (this.state.discordid.length < 5 || !(this.state.discordid.includes('#'))) {
+            if (this.state.discordid.length < 6 || !(this.state.discordid.includes('#'))) {
                 discordIDClass.push('invalidInput');
             }
             if (this.state.nationality.length !== 2) {
