@@ -62,7 +62,7 @@ class EnduranceTeamUpdate extends Component {
         this.setState({
             'teamname': selectedTeam['team_name'],
             'team_id': selectedTeam['id'],
-            'car': selectedTeam['car_name'],
+            'car': selectedTeam['car_id'],
             'carNumber': selectedTeam['entry_number'],
             'drivers': driverList,
             'country': '',
@@ -71,7 +71,7 @@ class EnduranceTeamUpdate extends Component {
     }
 
     handleCarSelect = (car) => {
-        this.setState({car: car.value})
+        this.setState({car: car.label})
     }
 
     handleSubmit = (event) => {
@@ -170,7 +170,7 @@ class EnduranceTeamUpdate extends Component {
                     label: car['friendly_name']
                 })
             })
-            carSelect = (<Select className="CarSelect" options={carOptions} onChange={this.handleCarSelect} value={carOptions.filter(option => option.label === this.state.car)} placeholder="Select car"/>);
+            carSelect = (<Select className="CarSelect" options={carOptions} onChange={this.handleCarSelect} value={carOptions.filter(option => option.value === this.state.car)} placeholder="Select car"/>);
         }
 
         let driverSelect = null;
