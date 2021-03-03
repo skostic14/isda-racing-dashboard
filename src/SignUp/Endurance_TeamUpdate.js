@@ -71,7 +71,7 @@ class EnduranceTeamUpdate extends Component {
     }
 
     handleCarSelect = (car) => {
-        this.setState({car: car.label})
+        this.setState({car: car.value})
     }
 
     handleSubmit = (event) => {
