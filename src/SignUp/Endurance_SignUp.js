@@ -59,9 +59,9 @@ class EnduranceTeamSignUp extends Component {
                 'pin': this.state.pin
             };
 
-            let link = 'http://localhost:3010/team_signup';
+            let link = 'https://backend.isdaracing.com/team_signup';
             if (this.state.update) {
-                link = 'http://localhost:3010/team_update/';
+                link = 'https://backend.isdaracing.com/team_update/';
             }
 
             fetch(link, {
@@ -85,19 +85,19 @@ class EnduranceTeamSignUp extends Component {
     }
 
     getRegisteredTeams = (season) => {
-        fetch('http://localhost:3010/get_registered_teams?season=' + season)
+        fetch('https://backend.isdaracing.com/get_registered_teams?season=' + season)
         .then( response => response.json())
         .then( data => this.setState({registeredTeams: data['teams']}));
     }
 
     getCarOptions = (season) => {
-        fetch('http://localhost:3010/get_car_options?season=' + season)
+        fetch('https://backend.isdaracing.com/get_car_options?season=' + season)
         .then( response => response.json())
         .then( data => this.setState({carOptions: data['cars']}));
     }
 
     getActiveDrivers = () => {
-        fetch('http://localhost:3010/get_active_drivers')
+        fetch('https://backend.isdaracing.com/get_active_drivers')
         .then( response => response.json())
         .then( data => this.setState({driverList: data['drivers']}));
     }
