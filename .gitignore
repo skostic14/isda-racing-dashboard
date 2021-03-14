@@ -27,4 +27,4 @@ yarn-error.log*
 yarn.lock
 
 # Firebase API keys
-src/Authentication/FirebaseConfig.js
+src/Authentication/FirebaseKeys.js
