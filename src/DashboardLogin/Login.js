@@ -14,7 +14,7 @@ export default function Login() {
 
     useEffect(() => {
         if (currentUser && currentUser !== undefined) {
-            history.push('/')
+            history.push('/logout')
         }
         return currentUser
     }, []);
