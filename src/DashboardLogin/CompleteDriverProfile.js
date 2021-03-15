@@ -155,7 +155,7 @@ export default function CompleteDriverProfile() {
                             <Form.Control type="text" ref={shortnameRef} required></Form.Control>
                         </Form.Group>
                         <Form.Group id="steamid">
-                            <Form.Label>Steam ID</Form.Label>
+                            <Form.Label>Steam ID (<a href="https://steamid.io/lookup">steamID64</a>)</Form.Label>
                             <Form.Control type="text" ref={steamIDRef} required></Form.Control>
                         </Form.Group>
                         <Form.Group id="discordid">
@@ -179,7 +179,7 @@ export default function CompleteDriverProfile() {
                     {successMessage && <Alert variant="success">{successMessage}</Alert>}
                     <Form onSubmit={handleSubmitExistingDriver}>
                         <Form.Group id="steamid">
-                            <Form.Label>Steam ID</Form.Label>
+                            <Form.Label>Steam ID (<a href="https://steamid.io/lookup">steamID64</a>)</Form.Label>
                             <Form.Control type="text" ref={steamIDRef} required></Form.Control>
                         </Form.Group>
                         <Button type="submit" className="w-25" disabled={loading}>Submit</Button>

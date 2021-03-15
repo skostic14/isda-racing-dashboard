@@ -18,6 +18,10 @@ export default function DashboardSignUp() {
         if (passwordRef.current.value !== passwordConfirmRef.current.value) {
             return(setError('Passwords do not match'))
         }
+
+        if (passwordRef.current.value.length < 6 || passwordRef.current.value.length > 21) {
+            return(setError('Password must be between 6 and 21 characters long'))
+        }
         
         try {
             setError('')
