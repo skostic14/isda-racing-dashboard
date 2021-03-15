@@ -75,6 +75,7 @@ export default function Login() {
                     </Form>
                 </Card.Body>
             </Card>
+            <div className="w-100 text-center mt-2">Don't have an account? <Link to="/password_reset">Sign up</Link></div>
             <div className="w-100 text-center mt-2">Don't have an account? <Link to="/sign_up">Sign up</Link></div>
         </div>
     )
