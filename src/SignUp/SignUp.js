@@ -36,7 +36,7 @@ class SignUp extends Component {
                 'discordid': this.state.discordid
             };
 
-            fetch('https://backend.isdaracing.com/signup/', {
+            fetch('https://backend.isdaracing.com/signup', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
