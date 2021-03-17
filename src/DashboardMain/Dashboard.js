@@ -6,6 +6,7 @@ import RaceResults from '../RaceResults/RaceResults.js'
 import Calendar from '../Calendar/Calendar.js'
 import SeasonStandings from '../RaceResults/SeasonStandings.js'
 import GT3Signup from '../SignUp/GT3_Signup.js'
+import SignUpList from '../SignUp/SignupList.js'
 
 export default function Dashboard() {
     const { currentUser, setCurrentDriver, currentDriver, currentUserToken } = useAuth()
@@ -63,6 +64,7 @@ export default function Dashboard() {
                     <Button variant="light outline-primary" className="mt-2 w-100"><a href='https://www.isdaracing.com'>ISDA Homepage</a></Button>
                     <Button variant="light outline-primary" className="mt-2 w-100"><a href='https://discord.gg/KZqV4Hfb9A'>ISDA Discord</a></Button>
                     <Button variant="light outline-primary" className="mt-2 w-100" onClick={() => setComponent('GT3Signup')}><a href="#">Sign up for 2021 ISDA GT3 World Challenge - Spring Season</a></Button>
+                    <Button variant="light outline-primary" className="mt-2 w-100" onClick={() => setComponent('SignUpList')}><a href='#'>Entry Lists</a></Button>
                 </Navbar>
                 <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4 w-100">
                     {component==='' && 
@@ -78,6 +80,7 @@ export default function Dashboard() {
                     {component==='Calendar' && <Calendar/>}
                     {component==='SeasonStandings' && <SeasonStandings/>}
                     {component==='GT3Signup' && <GT3Signup/>}
+                    {component==='SignUpList' && <SignUpList/>}
                 </main>
             </div>
             

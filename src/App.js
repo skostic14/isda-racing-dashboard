@@ -4,6 +4,7 @@ import RaceResults from './RaceResults/RaceResults.js';
 import SeasonStandings from './RaceResults/SeasonStandings.js';
 import EnduranceTeamSignUp from './SignUp/Endurance_SignUp.js';
 import EnduranceTeamUpdate from './SignUp/Endurance_TeamUpdate.js';
+import SignupList from './SignUp/SignupList.js';
 import Calendar from './Calendar/Calendar.js';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import 'typeface-roboto';
@@ -34,6 +35,7 @@ function App() {
             <Route path="/complete_profile" component={CompleteDriverProfile}></Route>
             <Route exact path="/" component={Dashboard}></Route>
             <Route path='/logout' component={Logout}></Route>
+            <Route path='/entry_lists' component={SignupList}></Route>
           </Switch>
         </BrowserRouter>
       </div>
