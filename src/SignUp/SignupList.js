@@ -11,7 +11,7 @@ export default function SignupList() {
     }, [])
 
     function getAvailableSeasons() {
-        fetch('http://localhost:3010/get_available_seasons/')
+        fetch('https://backend.isdaracing.com/get_available_seasons/')
             .then( response => response.json())
             .then( data => {
                 let availableSeasonsArray = []
@@ -29,7 +29,7 @@ export default function SignupList() {
 
     function getEntryList(season) {
         setEntryList([])
-        fetch('http://localhost:3010/get_registered_teams?season=' + season)
+        fetch('https://backend.isdaracing.com/get_registered_teams?season=' + season)
         .then( response => response.json())
         .then( data => setEntryList(data['teams']));
     }
