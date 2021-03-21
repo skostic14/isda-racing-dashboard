@@ -14,6 +14,7 @@ class EnduranceTeamUpdate extends Component {
             'team_id': '',
             'teamname': '',
             'car': '',
+            'carName': '',
             'carNumber': 0,
             'drivers': ['', '', '', ''],
             'country': '',
@@ -63,6 +64,7 @@ class EnduranceTeamUpdate extends Component {
             'teamname': selectedTeam['team_name'],
             'team_id': selectedTeam['id'],
             'car': selectedTeam['car_id'],
+            'carName': selectedTeam['car_name'],
             'carNumber': selectedTeam['entry_number'],
             'drivers': driverList,
             'country': '',
@@ -170,8 +172,9 @@ class EnduranceTeamUpdate extends Component {
                     label: car['friendly_name']
                 })
             })
-            carSelect = (<Select className="CarSelect" options={carOptions} onChange={this.handleCarSelect} value={carOptions.filter(option => option.value === this.state.car)} placeholder="Select car"/>);
+            //carSelect = (<Select className="CarSelect" options={carOptions} onChange={this.handleCarSelect} value={carOptions.filter(option => option.value === this.state.car)} placeholder="Select car"/>);
         }
+        carSelect = (<p>{this.state.carName}</p>)
 
         let driverSelect = null;
         let driverOptions = [];
