@@ -27,7 +27,15 @@ class RaceResults extends Component {
     getRaceResults = (raceID) =>  {
         fetch('https://backend.isdaracing.com/get_race_results?id=' + raceID['value'] + '&session=r')
         .then(response => response.json())
-        .then(data => this.setState({current_race_data: data['race_data'], results: data['results']}));
+        .then(data => {
+            if (Array.isArray(data['results'])) {
+                this.setState({results: data['results']})
+            }
+            else {
+                this.setState({results: data['results']['overall']})
+            }
+            this.setState({current_race_data: data['race_data']})
+        });
     }
 
     render() {
