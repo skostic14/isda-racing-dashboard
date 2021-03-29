@@ -12,7 +12,8 @@ class SeasonStandings extends Component {
             'driver_standings': {},
             'team_standings': [],
             'races': [],
-            'display': 'teams'
+            'display': 'teams',
+            'isMulticlass': false
         }
     }
 
@@ -27,9 +28,18 @@ class SeasonStandings extends Component {
     }
 
     getSeasonResults = (seasonID) =>  {
+        this.setState({display: ''})
         fetch('https://backend.isdaracing.com/get_season_standings?id=' + seasonID['value'])
             .then(response => response.json())
-            .then(data => this.setState({driver_standings: data['driver_standings'], races: data['races'], team_standings: data['team_standings']}));
+            .then(data => {
+                let multiclass = true
+                if (Array.isArray(data['driver_standings'])) {
+                    multiclass = false
+                }
+                this.setState({driver_standings: data['driver_standings'], races: data['races'], team_standings: data['team_standings'], isMulticlass: multiclass})
+
+                console.log(this.state.driver_standings)
+            });
     }
 
     handleStandingsSelectChange = (selected) => {
@@ -54,52 +64,152 @@ class SeasonStandings extends Component {
         }
 
         let standingsTable = null;
-        if (this.state.driver_standings.length > 0) {
+        if (true) {
             let positionCounter = 0;
-            if (this.state.display === 'Driver Standings') {
-                standingsTable = (
-                    <table className="ResultsTable">
-                        <tr className="ResultsTableHeader">
-                            <td>Position</td>
-                            <td>Driver</td>
-                            <td>Team</td>
+            console.log(this.state.display)
+            switch (this.state.display) {
+                case 'Driver Standings': 
+                    standingsTable = (
+                        <table className="ResultsTable">
+                            <tr className="ResultsTableHeader">
+                                <td>Position</td>
+                                <td>Driver</td>
+                                <td>Team</td>
+                                {
+                                    this.state.races.map((race) => {
+                                        return (<td>{race}</td>)
+                                    })
+                                }
+                                <td>Points</td>
+                            </tr>
                             {
-                                this.state.races.map((race) => {
-                                    return (<td>{race}</td>)
-                                })
-                            }
-                            <td>Points</td>
-                        </tr>
-                        {
-                        this.state.driver_standings.map((driver) => {
-                                return(<DriverStanding position={++positionCounter} driverName={driver['name']} team={driver['team']} 
-                                                        results={driver['results']} points={driver.points}></DriverStanding>)
-                        }) 
-                        }
-                    </table>
-                )
-            }
-
-            else if (this.state.display === 'Team Standings') {
-                standingsTable = (
-                    <table className='ResultsTable'>
-                        <tr className="ResultsTableHeader">
-                            <td>Position</td>
-                            <td>Team</td>
-                            <td>Points</td>
-                        </tr>
-                        {
-                            this.state.team_standings.map((team) => {
-                                    return(<tr><td>{++positionCounter}</td><td>{team['name']}</td><td>{team['points']}</td></tr>)
+                            this.state.driver_standings.map((driver) => {
+                                    return(<DriverStanding position={++positionCounter} driverName={driver['name']} team={driver['team']} 
+                                                            results={driver['results']} points={driver.points}></DriverStanding>)
                             }) 
-                        }
-                    </table>
-                )
+                            }
+                        </table>
+                    )
+                    break
+                case 'Driver Standings - PRO':
+                    standingsTable = (
+                        <table className="ResultsTable">
+                            <tr className="ResultsTableHeader">
+                                <td>Position</td>
+                                <td>Driver</td>
+                                <td>Team</td>
+                                {
+                                    this.state.races.map((race) => {
+                                        return (<td>{race}</td>)
+                                    })
+                                }
+                                <td>Points</td>
+                            </tr>
+                            {
+                            this.state.driver_standings['pro'].map((driver) => {
+                                    return(<DriverStanding position={++positionCounter} driverName={driver['name']} team={driver['team']} 
+                                                            results={driver['results']} points={driver.points}></DriverStanding>)
+                            }) 
+                            }
+                        </table>
+                    )
+                    break
+                case 'Driver Standings - AM':
+                    standingsTable = (
+                        <table className="ResultsTable">
+                            <tr className="ResultsTableHeader">
+                                <td>Position</td>
+                                <td>Driver</td>
+                                <td>Team</td>
+                                {
+                                    this.state.races.map((race) => {
+                                        return (<td>{race}</td>)
+                                    })
+                                }
+                                <td>Points</td>
+                            </tr>
+                            {
+                            this.state.driver_standings['am'].map((driver) => {
+                                    return(<DriverStanding position={++positionCounter} driverName={driver['name']} team={driver['team']} 
+                                                            results={driver['results']} points={driver.points}></DriverStanding>)
+                            }) 
+                            }
+                        </table>
+                    )
+                    break
+                case 'Team Standings': 
+                    standingsTable = (
+                        <table className='ResultsTable'>
+                            <tr className="ResultsTableHeader">
+                                <td>Position</td>
+                                <td>Team</td>
+                                <td>Points</td>
+                            </tr>
+                            {
+                                this.state.team_standings.map((team) => {
+                                        return(<tr><td>{++positionCounter}</td><td>{team['name']}</td><td>{team['points']}</td></tr>)
+                                }) 
+                            }
+                        </table>
+                    )
+                    break
+                case 'Team Standings - PRO': 
+                    standingsTable = (
+                        <table className='ResultsTable'>
+                            <tr className="ResultsTableHeader">
+                                <td>Position</td>
+                                <td>Team</td>
+                                <td>Points</td>
+                            </tr>
+                            {
+                                this.state.team_standings['pro'].map((team) => {
+                                        return(<tr><td>{++positionCounter}</td><td>{team['name']}</td><td>{team['points']}</td></tr>)
+                                }) 
+                            }
+                        </table>
+                    )
+                    break
+                case 'Team Standings - AM': 
+                    standingsTable = (
+                        <table className='ResultsTable'>
+                            <tr className="ResultsTableHeader">
+                                <td>Position</td>
+                                <td>Team</td>
+                                <td>Points</td>
+                            </tr>
+                            {
+                                this.state.team_standings['am'].map((team) => {
+                                        return(<tr><td>{++positionCounter}</td><td>{team['name']}</td><td>{team['points']}</td></tr>)
+                                }) 
+                            }
+                        </table>
+                    )
+                    break
             }
         }
 
         let availableStandingsArray = [];
-        if (this.state.driver_standings.length > 0) {
+
+        if (this.state.isMulticlass) {
+            console.log(this.state.driver_standings)
+            if (this.state.driver_standings['pro']) {
+                availableStandingsArray.push(
+                    {
+                        value: 'Driver Standings - PRO',
+                        label: 'Driver Standings - PRO'
+                    }
+                );
+            }
+            if (this.state.driver_standings['am']) {
+                availableStandingsArray.push(
+                    {
+                        value: 'Driver Standings - AM',
+                        label: 'Driver Standings - AM'
+                    }
+                );
+            }
+        }
+        else if (this.state.driver_standings.length) {
             availableStandingsArray.push(
                 {
                     value: 'Driver Standings',
@@ -108,7 +218,25 @@ class SeasonStandings extends Component {
             );
         }
 
-        if (this.state.team_standings.length > 0) {
+        if (this.state.isMulticlass) {
+            if (this.state.team_standings['pro']) {
+                availableStandingsArray.push(
+                    {
+                        value: 'Team Standings - PRO',
+                        label: 'Team Standings - PRO'
+                    }
+                );
+            }
+            if (this.state.team_standings['am']) {
+                availableStandingsArray.push(
+                    {
+                        value: 'Team Standings - AM',
+                        label: 'Team Standings - AM'
+                    }
+                );
+            }
+        }
+        else if (this.state.team_standings.length) {
             availableStandingsArray.push(
                 {
                     value: 'Team Standings',
@@ -120,8 +248,8 @@ class SeasonStandings extends Component {
         let standingsSelect = null;
         if (availableStandingsArray.length > 0) {
             standingsSelect = (<Select className="StandingsSelect" 
-                                        options={availableStandingsArray} 
-                                        onChange={this.handleStandingsSelectChange} 
+                                        options={availableStandingsArray}
+                                        onChange={this.handleStandingsSelectChange}
                                         isSearchable={false}
                                         placeholder={'Select available standings'}/>)
         }
