@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
+import { Button, Form } from 'react-bootstrap';
 import Select from 'react-select';
-import './SignUp.css';
 
 class EnduranceTeamSignUp extends Component {
 
@@ -11,7 +11,7 @@ class EnduranceTeamSignUp extends Component {
             'registeredTeams': [],
             'carOptions': [],
             'driverList': [],
-            'season': 'ACC_OneOff_Misano8h',
+            'season': 'ACC_OneOff_Kyalami9h',
             'teamname': '',
             'car': '',
             'carNumber': 0,
@@ -193,83 +193,46 @@ class EnduranceTeamSignUp extends Component {
             else {
                 signupMessageClass.push('signupError');
             }
-            signupMessage = (<tr><td><p className={signupMessageClass}>{this.state.signUpMessage}</p></td></tr>);
+            signupMessage = (<p className={signupMessageClass}>{this.state.signUpMessage}</p>);
         }
         
         return (
-            <div>
-                <table>
-                    <tbody>
-                        <tr>
-                            <td>
-                                <p>Team name</p>
-                                </td>
-                            <td>
-                                <input className={nameClass} type="text" name="teamname" onChange={this.handleChange}></input>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <p>Car</p>
-                                </td>
-                            <td>
-                               {carSelect}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <p>Car number</p>
-                                </td>
-                            <td>
-                                <input className={carNumberClass} type="number" name="carNumber" onChange={this.handleChange}></input>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <p>Driver 1</p>
-                                </td>
-                            <td>
-                                <Select className="DriverSelect" options={driverOptions} onChange={(e) => this.handleDriverSelect(e, 0)} placeholder="Select driver"/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <p>Driver 2</p>
-                                </td>
-                            <td>
-                                <Select className="DriverSelect" options={driverOptions} onChange={(e) => this.handleDriverSelect(e, 1)} placeholder="Select driver"/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <p>Driver 3</p>
-                                </td>
-                            <td>
-                                <Select className="DriverSelect" options={driverOptions} onChange={(e) => this.handleDriverSelect(e, 2)} placeholder="Select driver"/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <p>Driver 4</p>
-                                </td>
-                            <td>
-                                <Select className="DriverSelect" options={driverOptions} onChange={(e) => this.handleDriverSelect(e, 3)} placeholder="Select driver"/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <p>4-digit PIN</p>
-                                </td>
-                            <td>
-                                <input className={pinClass} type="number" name="pin" onChange={this.handleChange}></input>
-                            </td>
-                        </tr>
-                        <tr><td></td><td><button onClick={this.handleSubmit}>Submit</button></td></tr>
-                        
-                    </tbody>
-                </table>
+            <Form className="w-100">
+                <Form.Group>
+                    <Form.Label>Team name</Form.Label>
+                    <Form.Control type="text" name="teamname" onChange={this.handleChange}></Form.Control>
+                </Form.Group>
+                <Form.Group>
+                    <Form.Label>Car</Form.Label>
+                    {carSelect}
+                </Form.Group>
+                <Form.Group>
+                    <Form.Label>Car number</Form.Label>
+                    <Form.Control type="number" name="carNumber" onChange={this.handleChange}></Form.Control>
+                </Form.Group>
+                <Form.Group>
+                    <Form.Label>Driver 1</Form.Label>
+                    <Select className="DriverSelect" options={driverOptions} onChange={(e) => this.handleDriverSelect(e, 0)} placeholder="Select driver"/>
+                </Form.Group>
+                <Form.Group>
+                    <Form.Label>Driver 2</Form.Label>
+                    <Select className="DriverSelect" options={driverOptions} onChange={(e) => this.handleDriverSelect(e, 1)} placeholder="Select driver"/>
+                </Form.Group>
+                <Form.Group>
+                    <Form.Label>Driver 3</Form.Label>
+                    <Select className="DriverSelect" options={driverOptions} onChange={(e) => this.handleDriverSelect(e, 2)} placeholder="Select driver"/>
+                </Form.Group>
+                <Form.Group>
+                    <Form.Label>Driver 4</Form.Label>
+                    <Select className="DriverSelect" options={driverOptions} onChange={(e) => this.handleDriverSelect(e, 3)} placeholder="Select driver"/>
+                </Form.Group>
+                <Form.Group>
+                    <Form.Label>4-digit PIN Code</Form.Label>
+                    <Form.Control type="number" name="pin" onChange={this.handleChange}></Form.Control>
+                </Form.Group>
+                <Button onClick={this.handleSubmit}>Submit</Button>
                 {signupMessage}
-            </div>
+            </Form>
         )
     }
 }

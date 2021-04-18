@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Select from 'react-select';
-import './SignUp.css';
+import { Button, Form } from 'react-bootstrap';
+//import './SignUp.css';
 
 class EnduranceTeamUpdate extends Component {
 
@@ -10,7 +11,7 @@ class EnduranceTeamUpdate extends Component {
             'registeredTeams': [],
             'carOptions': [],
             'driverList': [],
-            'season': 'ACC_OneOff_Misano8h',
+            'season': 'ACC_OneOff_Kyalami9h',
             'team_id': '',
             'teamname': '',
             'car': '',
@@ -172,9 +173,8 @@ class EnduranceTeamUpdate extends Component {
                     label: car['friendly_name']
                 })
             })
-            //carSelect = (<Select className="CarSelect" options={carOptions} onChange={this.handleCarSelect} value={carOptions.filter(option => option.value === this.state.car)} placeholder="Select car"/>);
+            carSelect = (<Select className="CarSelect" options={carOptions} onChange={this.handleCarSelect} value={carOptions.filter(option => option.value === this.state.car)} placeholder="Select car"/>);
         }
-        carSelect = (<p>{this.state.carName}</p>)
 
         let driverSelect = null;
         let driverOptions = [];
@@ -236,79 +236,42 @@ class EnduranceTeamUpdate extends Component {
         }
         
         return (
-            <div>
-                <table>
-                    <tbody>
-                        <tr>
-                            <td>
-                                <p>Team to edit</p>
-                                </td>
-                            <td>
-                                {teamSelect}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <p>Car</p>
-                                </td>
-                            <td>
-                               {carSelect}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <p>Car number</p>
-                                </td>
-                            <td>
-                                <input className={carNumberClass} type="number" name="carNumber" onChange={this.handleChange} value={this.state.carNumber}></input>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <p>Driver 1</p>
-                                </td>
-                            <td>
-                                <Select className="DriverSelect" options={driverOptions} onChange={(e) => this.handleDriverSelect(e, 0)} value={driverOptions.filter(option => option.label === this.state.drivers[0])} placeholder="Select driver"/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <p>Driver 2</p>
-                                </td>
-                            <td>
-                                <Select className="DriverSelect" options={driverOptions} onChange={(e) => this.handleDriverSelect(e, 1)} value={driverOptions.filter(option => option.label === this.state.drivers[1])} placeholder="Select driver"/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <p>Driver 3</p>
-                                </td>
-                            <td>
-                                <Select className="DriverSelect" options={driverOptions} onChange={(e) => this.handleDriverSelect(e, 2)} value={driverOptions.filter(option => option.label === this.state.drivers[2])} placeholder="Select driver"/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <p>Driver 4</p>
-                                </td>
-                            <td>
-                                <Select className="DriverSelect" options={driverOptions} onChange={(e) => this.handleDriverSelect(e, 3)} value={driverOptions.filter(option => option.label === this.state.drivers[3])} placeholder="Select driver"/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <p>4-digit PIN</p>
-                                </td>
-                            <td>
-                                <input className={pinClass} type="number" name="pin" onChange={this.handleChange}></input>
-                            </td>
-                        </tr>
-                        <tr><td></td><td><button onClick={this.handleSubmit}>Confirm changes</button></td></tr>
-                        
-                    </tbody>
-                </table>
+            <Form>
+                <Form.Group>
+                    <Form.Label>Team to edit</Form.Label>
+                    {teamSelect}
+                </Form.Group>
+                <Form.Group>
+                    <Form.Label>Car</Form.Label>
+                    {carSelect}
+                </Form.Group>
+                <Form.Group>
+                    <Form.Label>Car number</Form.Label>
+                    <Form.Control type="number" name="carNumber" onChange={this.handleChange} value={this.state.carNumber}></Form.Control>
+                </Form.Group>
+                <Form.Group>
+                    <Form.Label>Driver 1</Form.Label>
+                    <Select className="DriverSelect" options={driverOptions} onChange={(e) => this.handleDriverSelect(e, 0)} value={driverOptions.filter(option => option.label === this.state.drivers[0])} placeholder="Select driver"/>
+                </Form.Group>
+                <Form.Group>
+                    <Form.Label>Driver 2</Form.Label>
+                    <Select className="DriverSelect" options={driverOptions} onChange={(e) => this.handleDriverSelect(e, 1)} value={driverOptions.filter(option => option.label === this.state.drivers[1])} placeholder="Select driver"/>
+                </Form.Group>
+                <Form.Group>
+                    <Form.Label>Driver 3</Form.Label>
+                    <Select className="DriverSelect" options={driverOptions} onChange={(e) => this.handleDriverSelect(e, 2)} value={driverOptions.filter(option => option.label === this.state.drivers[2])} placeholder="Select driver"/>
+                </Form.Group>
+                <Form.Group>
+                    <Form.Label>Driver 4</Form.Label>
+                    <Select className="DriverSelect" options={driverOptions} onChange={(e) => this.handleDriverSelect(e, 3)} value={driverOptions.filter(option => option.label === this.state.drivers[3])} placeholder="Select driver"/>
+                </Form.Group>
+                <Form.Group>
+                    <Form.Label>4-digit PIN</Form.Label>
+                    <Form.Control type="number" name="pin" onChange={this.handleChange}></Form.Control>
+                </Form.Group>
+                <Button onClick={this.handleSubmit}>Confirm changes</Button>
                 {signupMessage}
-            </div>
+            </Form>
         )
     }
 }
