@@ -83,7 +83,9 @@ export default function Dashboard() {
                 <Navbar className="col-md-2 d-none d-md-block bg-light sidebar">
                     <Button variant="light outline-primary" className="mt-2 w-100"><a href='https://www.isdaracing.com'>ISDA Homepage</a></Button>
                     <Button variant="light outline-primary" className="mt-2 w-100"><a href='https://discord.gg/KZqV4Hfb9A'>ISDA Discord</a></Button>
+                    <hr/>
                     <Button variant="light outline-primary" className="mt-2 w-100" onClick={() => setComponent('GT3Signup')}><a href="#">Sign up for 2021 ISDA GT3 World Challenge - Spring Season</a></Button>
+                    <Button variant="light outline-primary" className="mt-2 w-100"><a href='https://docs.google.com/forms/d/1uE3K60cAbiJ6Eh3Xn19Jga69KpL1-q9i8NA3TrYdnaU' target="_blank">Give us feedback!</a></Button>
                     <hr/>
                     <Button variant="light outline-primary" className="mt-2 w-100" onClick={() => setComponent('Endurance_SignUp')}><a href='#'>9h of Kyalami - Team Registration</a></Button>
                     <Button variant="light outline-primary" className="mt-2 w-100" onClick={() => setComponent('Endurance_TeamUpdate')}><a href='#'>9h of Kyalami - Team Update</a></Button>
