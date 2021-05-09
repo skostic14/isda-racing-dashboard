@@ -6,16 +6,18 @@ class EnduranceTeamSignUp extends Component {
 
     constructor(props) {
         super(props);
+        const driversArray = new Array(props.maxDrivers);
         this.state = {
             'availableSeasons': [],
             'registeredTeams': [],
             'carOptions': [],
             'driverList': [],
-            'season': 'ACC_OneOff_Kyalami9h',
+            'season': props.season,
             'teamname': '',
             'car': '',
             'carNumber': 0,
-            'drivers': ['', '', '', ''],
+            'maxDrivers': props.maxDrivers,
+            'drivers': driversArray,
             'country': '',
             'pin': '',
             'update': false,
@@ -39,7 +41,13 @@ class EnduranceTeamSignUp extends Component {
 
     handleDriverSelect = (driver, index) => {
         let current_driver_list = this.state.drivers;
-        current_driver_list[index] = driver.value;
+        if (driver === null) {
+            current_driver_list.splice(index, 1)
+            current_driver_list.push('')
+        }
+        else {
+            current_driver_list[index] = driver.value;
+        }
         this.setState({drivers: current_driver_list})
     }
 
@@ -137,7 +145,12 @@ class EnduranceTeamSignUp extends Component {
         let pinClass = [];
 
         let carSelect = [];
-        if (this.state.carOptions.length > 0) {
+
+        if (this.state.carOptions.length === 1) {
+            carSelect = (<p>{this.state.carOptions[0].friendly_name}</p>);
+            this.state.car = this.state.carOptions[0].id
+        }
+        else if (this.state.carOptions.length > 1) {
             let carOptions = [];
             this.state.carOptions.map((car) => {
                 return carOptions.push({
@@ -196,6 +209,18 @@ class EnduranceTeamSignUp extends Component {
             signupMessage = (<p className={signupMessageClass}>{this.state.signUpMessage}</p>);
         }
         
+        let driverSelectGroup = []
+        let driverCount
+        for(driverCount = 0; driverCount < this.state.maxDrivers; ++driverCount) {
+            const i = driverCount
+            driverSelectGroup.push(
+                <Form.Group>
+                    <Form.Label>Driver {i}</Form.Label>
+                    <Select className="DriverSelect" options={driverOptions} isClearable="true" onChange={(e) => this.handleDriverSelect(e, i)} placeholder="Select driver"/>
+                </Form.Group>
+            )
+        }  
+
         return (
             <Form className="w-100">
                 <Form.Group>
@@ -210,22 +235,7 @@ class EnduranceTeamSignUp extends Component {
                     <Form.Label>Car number</Form.Label>
                     <Form.Control type="number" name="carNumber" onChange={this.handleChange}></Form.Control>
                 </Form.Group>
-                <Form.Group>
-                    <Form.Label>Driver 1</Form.Label>
-                    <Select className="DriverSelect" options={driverOptions} onChange={(e) => this.handleDriverSelect(e, 0)} placeholder="Select driver"/>
-                </Form.Group>
-                <Form.Group>
-                    <Form.Label>Driver 2</Form.Label>
-                    <Select className="DriverSelect" options={driverOptions} onChange={(e) => this.handleDriverSelect(e, 1)} placeholder="Select driver"/>
-                </Form.Group>
-                <Form.Group>
-                    <Form.Label>Driver 3</Form.Label>
-                    <Select className="DriverSelect" options={driverOptions} onChange={(e) => this.handleDriverSelect(e, 2)} placeholder="Select driver"/>
-                </Form.Group>
-                <Form.Group>
-                    <Form.Label>Driver 4</Form.Label>
-                    <Select className="DriverSelect" options={driverOptions} onChange={(e) => this.handleDriverSelect(e, 3)} placeholder="Select driver"/>
-                </Form.Group>
+                {driverSelectGroup}
                 <Form.Group>
                     <Form.Label>4-digit PIN Code</Form.Label>
                     <Form.Control type="number" name="pin" onChange={this.handleChange}></Form.Control>

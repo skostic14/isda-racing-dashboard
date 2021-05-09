@@ -41,20 +41,35 @@ export default function Dashboard() {
         return currentUser
     }, []);
 
-    const enduranceSignUp = (
+    const kyalamiSignUp = (
         <div className="container w-75">
             <h4>9h of Kyalami</h4>
             <h4>May 22 - 15:00 CEST</h4>
             <h4 className="mb-4">Team registration</h4>
-            <Endurance_SignUp/>
+            <Endurance_SignUp season="ACC_OneOff_Kyalami9h" maxDrivers="4"/>
         </div>)
     
-    const enduranceUpdate = (
+    const kyalamiUpdate = (
         <div className="container w-75">
             <h4>9h of Kyalami</h4>
             <h4>May 22 - 15:00 CEST</h4>
             <h4 className="mb-4">Team update</h4>
-            <Endurance_TeamUpdate/>
+            <Endurance_TeamUpdate season="ACC_OneOff_Kyalami9h" maxDrivers="4"/>
+        </div>
+    )
+
+    const pcupSignUp = (
+        <div className="container w-75">
+            <h4>2021 ISDA Porsche Cup Challenge - Spring Season</h4>
+            <h4 className="mb-4">Team registration</h4>
+            <Endurance_SignUp season="ACC_Pcup_S1" maxDrivers="2"/>
+        </div>)
+    
+    const pcupUpdate = (
+        <div className="container w-75">
+            <h4>2021 ISDA Porsche Cup Challenge - Spring Season</h4>
+            <h4 className="mb-4">Team update</h4>
+            <Endurance_TeamUpdate season="ACC_Pcup_S1" maxDrivers="2"/>
         </div>
     )
 
@@ -84,11 +99,11 @@ export default function Dashboard() {
                     <Button variant="light outline-primary" className="mt-2 w-100"><a href='https://www.isdaracing.com'>ISDA Homepage</a></Button>
                     <Button variant="light outline-primary" className="mt-2 w-100"><a href='https://discord.gg/KZqV4Hfb9A'>ISDA Discord</a></Button>
                     <hr/>
-                    <Button variant="light outline-primary" className="mt-2 w-100" onClick={() => setComponent('GT3Signup')}><a href="#">Sign up for 2021 ISDA GT3 World Challenge - Spring Season</a></Button>
-                    <Button variant="light outline-primary" className="mt-2 w-100"><a href='https://docs.google.com/forms/d/1uE3K60cAbiJ6Eh3Xn19Jga69KpL1-q9i8NA3TrYdnaU' target="_blank">Give us feedback!</a></Button>
+                    <Button variant="light outline-primary" className="mt-2 w-100" onClick={() => setComponent('9hKyalamiSignUp')}><a href='#'>9h of Kyalami - Team Registration</a></Button>
+                    <Button variant="light outline-primary" className="mt-2 w-100" onClick={() => setComponent('9hKyalamiTeamUpdate')}><a href='#'>9h of Kyalami - Team Update</a></Button>
                     <hr/>
-                    <Button variant="light outline-primary" className="mt-2 w-100" onClick={() => setComponent('Endurance_SignUp')}><a href='#'>9h of Kyalami - Team Registration</a></Button>
-                    <Button variant="light outline-primary" className="mt-2 w-100" onClick={() => setComponent('Endurance_TeamUpdate')}><a href='#'>9h of Kyalami - Team Update</a></Button>
+                    <Button variant="light outline-primary" className="mt-2 w-100" onClick={() => setComponent('PcupSignUp')}><a href='#'>Porsche Cup Challenge - Registration</a></Button>
+                    <Button variant="light outline-primary" className="mt-2 w-100" onClick={() => setComponent('PcupTeamUpdate')}><a href='#'>Porsche Cup Challenge - Team Update</a></Button>
                 </Navbar>
                 <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4 w-100 mt-4">
                     <div className="w-100">
@@ -106,8 +121,10 @@ export default function Dashboard() {
                         {component==='SeasonStandings' && <SeasonStandings/>}
                         {component==='GT3Signup' && <GT3Signup/>}
                         {component==='SignUpList' && <SignUpList/>}
-                        {component==='Endurance_SignUp' && enduranceSignUp}
-                        {component==='Endurance_TeamUpdate' && enduranceUpdate}
+                        {component==='9hKyalamiSignUp' && kyalamiSignUp}
+                        {component==='9hKyalamiTeamUpdate' && kyalamiUpdate}
+                        {component==='PcupSignUp' && pcupSignUp}
+                        {component==='PcupTeamUpdate' && pcupUpdate}
                     </div> 
                 </main>
             </div>
