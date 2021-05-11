@@ -114,7 +114,8 @@ export default function Dashboard() {
                             <h3 className="mt-5">Please note that the dashboard is in development and that features will be gradually added.</h3>
                             <h3>For more information about dashboard updates, keep an eye on our Discord!</h3>
 
-                            <Link onClick={() => setComponent('Endurance_SignUp')}><h1 className="mt-4 link">Sign up for 9h of Kyalami - May 22</h1></Link>    
+                            <Link onClick={() => setComponent('9hKyalamiSignUp')}><h1 className="mt-4 link">Sign up for 9h of Kyalami - May 22</h1></Link>
+                            <Link onClick={() => setComponent('PcupSignUp')}><h1 className="mt-4 link">Sign up for 2021 ISDA Porsche Cup Challenge - Spring Season</h1></Link>
                         </div>}
                         {component==='RaceResults' && <RaceResults/>}
                         {component==='Calendar' && <Calendar/>}
