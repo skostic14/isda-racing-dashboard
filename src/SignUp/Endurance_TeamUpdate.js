@@ -173,7 +173,7 @@ class EnduranceTeamUpdate extends Component {
         let pinClass = [];
 
         let carSelect = null;
-        if (this.state.carOptions.length === 1) {
+        /*if (this.state.carOptions.length === 1) {
             carSelect = (<p>{this.state.carOptions[0].friendly_name}</p>);
             this.state.car = this.state.carOptions[0].id
         }
@@ -187,7 +187,7 @@ class EnduranceTeamUpdate extends Component {
             })
             carSelect = (<Select className="CarSelect" options={carOptions} onChange={this.handleCarSelect} value={carOptions.filter(option => option.value === this.state.car)} placeholder="Select car"/>);
         }
-
+*/   
         let driverSelect = null;
         let driverOptions = [];
         if (this.state.driverList.length > 0) {
@@ -264,10 +264,10 @@ class EnduranceTeamUpdate extends Component {
                     <Form.Label>Team to edit</Form.Label>
                     {teamSelect}
                 </Form.Group>
-                <Form.Group>
+                {/* <Form.Group>
                     <Form.Label>Car</Form.Label>
                     {carSelect}
-                </Form.Group>
+                </Form.Group> */}
                 <Form.Group>
                     <Form.Label>Car number</Form.Label>
                     <Form.Control type="number" name="carNumber" onChange={this.handleChange} value={this.state.carNumber}></Form.Control>
