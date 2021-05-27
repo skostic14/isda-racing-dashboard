@@ -9,6 +9,7 @@ import Endurance_SignUp from '../SignUp/Endurance_SignUp.js'
 import Endurance_TeamUpdate from '../SignUp/Endurance_TeamUpdate.js'
 import GT3Signup from '../SignUp/GT3_Signup.js'
 import SignUpList from '../SignUp/SignupList.js'
+import IncidentReportForm from '../IncidentReports/IncidentReportForm.js'
 
 export default function Dashboard() {
     const { currentUser, setCurrentDriver, currentDriver, currentUserToken } = useAuth()
@@ -86,6 +87,7 @@ export default function Dashboard() {
                     </NavDropdown>
                     <Nav.Link onClick={() => setComponent('Calendar')}>Calendar</Nav.Link>
                     <Nav.Link onClick={() => setComponent('SignUpList')}>Entry Lists</Nav.Link>
+                    <Nav.Link onClick={() => setComponent('IncidentReportForm')}>Incident report (NEW)</Nav.Link>
                 </Nav>
                 <Nav className="float-right">
                     <Nav.Link className="mr-auto">{currentDriver}</Nav.Link>
@@ -126,6 +128,7 @@ export default function Dashboard() {
                         {component==='9hKyalamiTeamUpdate' && kyalamiUpdate}
                         {component==='PcupSignUp' && pcupSignUp}
                         {component==='PcupTeamUpdate' && pcupUpdate}
+                        {component==='IncidentReportForm' && <IncidentReportForm/>}
                     </div> 
                 </main>
             </div>
