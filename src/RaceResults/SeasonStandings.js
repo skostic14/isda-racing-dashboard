@@ -137,6 +137,29 @@ class SeasonStandings extends Component {
                         </table>
                     )
                     break
+                    case 'Driver Standings - SILVER':
+                        standingsTable = (
+                            <table className="ResultsTable">
+                                <tr className="ResultsTableHeader">
+                                    <td>Position</td>
+                                    <td>Driver</td>
+                                    <td>Team</td>
+                                    {
+                                        this.state.races.map((race) => {
+                                            return (<td>{race}</td>)
+                                        })
+                                    }
+                                    <td>Points</td>
+                                </tr>
+                                {
+                                this.state.driver_standings['silver'].map((driver) => {
+                                        return(<DriverStanding position={++positionCounter} driverName={driver['name']} team={driver['team']} 
+                                                                results={driver['results']} points={driver.points}></DriverStanding>)
+                                }) 
+                                }
+                            </table>
+                        )
+                        break
                 case 'Team Standings': 
                     standingsTable = (
                         <table className='ResultsTable'>
@@ -185,6 +208,22 @@ class SeasonStandings extends Component {
                         </table>
                     )
                     break
+                case 'Team Standings - SILVER': 
+                    standingsTable = (
+                        <table className='ResultsTable'>
+                            <tr className="ResultsTableHeader">
+                                <td>Position</td>
+                                <td>Team</td>
+                                <td>Points</td>
+                            </tr>
+                            {
+                                this.state.team_standings['silver'].map((team) => {
+                                        return(<tr><td>{++positionCounter}</td><td>{team['name']}</td><td>{team['points']}</td></tr>)
+                                }) 
+                            }
+                        </table>
+                    )
+                    break
             }
         }
 
@@ -205,6 +244,15 @@ class SeasonStandings extends Component {
                     {
                         value: 'Driver Standings - AM',
                         label: 'Driver Standings - AM'
+                    }
+                );
+            }
+
+            if (this.state.driver_standings['silver']) {
+                availableStandingsArray.push(
+                    {
+                        value: 'Driver Standings - SILVER',
+                        label: 'Driver Standings - SILVER'
                     }
                 );
             }
@@ -232,6 +280,14 @@ class SeasonStandings extends Component {
                     {
                         value: 'Team Standings - AM',
                         label: 'Team Standings - AM'
+                    }
+                );
+            }
+            if (this.state.team_standings['silver']) {
+                availableStandingsArray.push(
+                    {
+                        value: 'Team Standings - SILVER',
+                        label: 'Team Standings - SILVER'
                     }
                 );
             }
