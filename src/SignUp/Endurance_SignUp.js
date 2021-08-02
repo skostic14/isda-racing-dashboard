@@ -215,7 +215,7 @@ class EnduranceTeamSignUp extends Component {
             const i = driverCount
             driverSelectGroup.push(
                 <Form.Group>
-                    <Form.Label>Driver {i}</Form.Label>
+                    <Form.Label>Driver {i+1}</Form.Label>
                     <Select className="DriverSelect" options={driverOptions} isClearable="true" onChange={(e) => this.handleDriverSelect(e, i)} placeholder="Select driver"/>
                 </Form.Group>
             )

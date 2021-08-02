@@ -42,6 +42,23 @@ export default function Dashboard() {
         return currentUser
     }, []);
 
+    const monzaSignUp = (
+        <div className="container w-75">
+            <h4>8h of Monza</h4>
+            <h4>August 28 - 15:00 CEST</h4>
+            <h4 className="mb-4">Team registration</h4>
+            <Endurance_SignUp season="ACC_OneOff_Monza8h" maxDrivers="4"/>
+        </div>)
+
+    const monzaUpdate = (
+        <div className="container w-75">
+            <h4>8h of Monza</h4>
+            <h4>August 28 - 15:00 CEST</h4>
+            <h4 className="mb-4">Team update</h4>
+            <Endurance_TeamUpdate season="ACC_OneOff_Monza8h" maxDrivers="4"/>
+        </div>
+    )
+
     return (
         <div className="h-100 bg-light">
             <Navbar bg="dark" variant="dark">
@@ -68,6 +85,9 @@ export default function Dashboard() {
                 <Navbar className="col-md-2 d-none d-md-block bg-light sidebar">
                     <Button variant="light outline-primary" className="mt-2 w-100"><a href='https://www.isdaracing.com'>ISDA Homepage</a></Button>
                     <Button variant="light outline-primary" className="mt-2 w-100"><a href='https://discord.gg/KZqV4Hfb9A'>ISDA Discord</a></Button>
+                    <hr/>
+                    <Button variant="light outline-primary" className="mt-2 w-100" onClick={() => setComponent('monzaSignUp')}><a href='#'>8h of Monza - Team Registration</a></Button>
+                    <Button variant="light outline-primary" className="mt-2 w-100" onClick={() => setComponent('monzaUpdate')}><a href='#'>8h of Monza - Team Update</a></Button>
                 </Navbar>
                 <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4 w-100 mt-4">
                     <div className="w-100">
@@ -77,6 +97,7 @@ export default function Dashboard() {
                             <h1 className="mt-5">Welcome to International Sim Drivers Association!</h1>
                             <h3 className="mt-5">Please note that the dashboard is in development and that features will be gradually added.</h3>
                             <h3>For more information about dashboard updates, keep an eye on our Discord!</h3>
+                            <Link onClick={() => setComponent('monzaSignUp')}><h1 className="mt-4 link">Sign up for 8h of Monza - August 28</h1></Link>
                         </div>}
                         {component==='RaceResults' && <RaceResults/>}
                         {component==='Calendar' && <Calendar/>}
@@ -84,6 +105,8 @@ export default function Dashboard() {
                         {component==='GT3Signup' && <GT3Signup/>}
                         {component==='SignUpList' && <SignUpList/>}
                         {component==='IncidentReportForm' && <IncidentReportForm/>}
+                        {component==='monzaSignUp' && monzaSignUp}
+                        {component==='monzaUpdate' && monzaUpdate}
                     </div> 
                 </main>
             </div>
