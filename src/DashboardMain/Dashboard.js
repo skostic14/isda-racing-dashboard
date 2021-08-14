@@ -88,16 +88,29 @@ export default function Dashboard() {
                     <hr/>
                     <Button variant="light outline-primary" className="mt-2 w-100" onClick={() => setComponent('monzaSignUp')}><a href='#'>8h of Monza - Team Registration</a></Button>
                     <Button variant="light outline-primary" className="mt-2 w-100" onClick={() => setComponent('monzaUpdate')}><a href='#'>8h of Monza - Team Update</a></Button>
+                    <hr />
+                    <Button variant="light outline-primary" className="mt-2 w-100" onClick={() => setComponent('GT3Signup')}><a href='#'>Register for 2021 ISDA GT3 World Challenge - Autumn Season</a></Button>
                 </Navbar>
                 <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4 w-100 mt-4">
                     <div className="w-100">
                         {component==='' && 
                         <div>
-                            <img alt="ISDA BMW M6" src="https://www.isdaracing.com/wp-content/uploads/2021/01/Assetto-Corsa-Competizione-Screenshot-2020.12.28-17.00.00.31-e1610016811534-1024x461.png"></img>
-                            <h1 className="mt-5">Welcome to International Sim Drivers Association!</h1>
-                            <h3 className="mt-5">Please note that the dashboard is in development and that features will be gradually added.</h3>
-                            <h3>For more information about dashboard updates, keep an eye on our Discord!</h3>
-                            <Link onClick={() => setComponent('monzaSignUp')}><h1 className="mt-4 link">Sign up for 8h of Monza - August 28</h1></Link>
+                            <h1 className="mt-2 mb-4">Welcome to International Sim Drivers Association!</h1>
+                            <div className="row w-75 ml-auto mr-auto">
+                                <div className="col-md-6">
+                                    <Link onClick={() => setComponent('monzaSignUp')}>
+                                    <img className="img-fluid" alt="ISDA GT3 World Challenge - Autumn Season" src="https://www.isdaracing.com/wp-content/uploads/2021/08/8hmonza2.2.png"></img>
+                                    <h3 className="mt-2 link">Register for 8h of Monza <br/> August 28 - 15:00 CEST</h3></Link>
+                                </div>
+                                <div className="col-md-6">
+                                    <Link onClick={() => setComponent('GT3Signup')}>
+                                    <img className="img-fluid" alt="ISDA GT3 World Challenge - Autumn Season" src="https://www.isdaracing.com/wp-content/uploads/2021/08/signups_open.png"></img>
+                                    <h3 className="mt-2 link">Register for 2021 ISDA GT3 World Challenge - Autumn Season</h3>
+                                    </Link>
+                                </div>
+                            </div>
+                            <h5 className="mt-3">Please note that the dashboard is in development and that features will be gradually added.</h5>
+                            <h5>For more information about dashboard updates, keep an eye on our Discord!</h5>
                         </div>}
                         {component==='RaceResults' && <RaceResults/>}
                         {component==='Calendar' && <Calendar/>}

@@ -57,10 +57,11 @@ export default function Login() {
     }
 
     return (
-        <div>
+        <div className="mt-2 w-50 ml-auto mr-auto">
+            <h3 className="mb-4">International Sim Drivers Association</h3>
             <Card>
                 <Card.Body>
-                    <h2 className="text-center mb-4">Log in</h2>
+                    <h3 className="text-center mb-4">Log in</h3>
                     {error && <Alert variant="danger">{error}</Alert>}
                     <Form onSubmit={handleSubmit}>
                         <Form.Group id="email">
@@ -71,12 +72,12 @@ export default function Login() {
                             <Form.Label>Password</Form.Label>
                             <Form.Control type="password" ref={passwordRef} required></Form.Control>
                         </Form.Group>
-                        <Button type="submit" className="w-100" disabled={loading}>Log in</Button>
+                        <Button type="submit" className="w-50" disabled={loading}>Log in</Button>
                     </Form>
                 </Card.Body>
             </Card>
-            <div className="w-100 text-center mt-2"><Link to="/password_reset">Reset password</Link></div>
-            <div className="w-100 text-center mt-2">Don't have an account? <Link to="/sign_up">Sign up</Link></div>
+            <div className="mt-2"><Link to="/password_reset">Reset password</Link></div>
+            <div className="mt-2">Don't have an account? <Link to="/sign_up">Sign up</Link></div>
         </div>
     )
 }
