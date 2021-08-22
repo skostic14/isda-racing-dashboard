@@ -88,8 +88,10 @@ export default function Dashboard() {
                     <hr/>
                     <Button variant="light outline-primary" className="mt-2 w-100" onClick={() => setComponent('monzaSignUp')}><a href='#'>8h of Monza - Team Registration</a></Button>
                     <Button variant="light outline-primary" className="mt-2 w-100" onClick={() => setComponent('monzaUpdate')}><a href='#'>8h of Monza - Team Update</a></Button>
+                    <Button variant="light outline-primary" className="mt-2 w-100"><a href='https://forms.gle/u8i3RSqdQgiBoR7J9'>8h of Monza - Livery Upload</a></Button>
                     <hr />
                     <Button variant="light outline-primary" className="mt-2 w-100" onClick={() => setComponent('GT3Signup')}><a href='#'>Register for 2021 ISDA GT3 World Challenge - Autumn Season</a></Button>
+                    <Button variant="light outline-primary" className="mt-2 w-100"><a href='https://forms.gle/4c3yFp5SehgVerzZ6'>2021 ISDA GT3 World Challenge - Autumn Season - Livery Upload</a></Button>
                 </Navbar>
                 <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4 w-100 mt-4">
                     <div className="w-100">
