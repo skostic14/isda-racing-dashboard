@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import Select from 'react-select';
 import './RaceResults.css';
 import CarPosition from './CarPosition.js';
+import {Table} from 'react-bootstrap';
 
 class RaceResults extends Component {
 
@@ -56,7 +57,7 @@ class RaceResults extends Component {
         if (this.state.results.length > 0) {
             let positionCounter = 0;
             raceResultsTable = (
-                <table className="ResultsTable">
+                <Table>
                     <tr className="ResultsTableHeader">
                         <td>Position</td>
                         <td>Driver</td>
@@ -74,7 +75,7 @@ class RaceResults extends Component {
                                                 totalTime={car['total_time']} gap={car['gap']} laps={car['laps']}></CarPosition>)
                        }) 
                     }
-                </table>
+                </Table>
             )
         }
 

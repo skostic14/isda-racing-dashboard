@@ -1,5 +1,5 @@
 import React from 'react';
-import './RaceResults.css';
+import {Table} from 'react-bootstrap';
 
 const renderCarPosition = (props) => {
     return (

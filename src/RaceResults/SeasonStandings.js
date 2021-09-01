@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import Select from 'react-select';
 import './RaceResults.css';
 import DriverStanding from './DriverStanding.js';
+import {Table} from 'react-bootstrap';
 
 class SeasonStandings extends Component {
 
@@ -70,7 +71,7 @@ class SeasonStandings extends Component {
             switch (this.state.display) {
                 case 'Driver Standings': 
                     standingsTable = (
-                        <table className="ResultsTable">
+                        <Table className="ResultsTable">
                             <tr className="ResultsTableHeader">
                                 <td>Position</td>
                                 <td>Driver</td>
@@ -88,12 +89,12 @@ class SeasonStandings extends Component {
                                                             results={driver['results']} points={driver.points}></DriverStanding>)
                             }) 
                             }
-                        </table>
+                        </Table>
                     )
                     break
                 case 'Driver Standings - PRO':
                     standingsTable = (
-                        <table className="ResultsTable">
+                        <Table className="ResultsTable">
                             <tr className="ResultsTableHeader">
                                 <td>Position</td>
                                 <td>Driver</td>
@@ -111,12 +112,12 @@ class SeasonStandings extends Component {
                                                             results={driver['results']} points={driver.points}></DriverStanding>)
                             }) 
                             }
-                        </table>
+                        </Table>
                     )
                     break
                 case 'Driver Standings - AM':
                     standingsTable = (
-                        <table className="ResultsTable">
+                        <Table className="ResultsTable">
                             <tr className="ResultsTableHeader">
                                 <td>Position</td>
                                 <td>Driver</td>
@@ -134,12 +135,12 @@ class SeasonStandings extends Component {
                                                             results={driver['results']} points={driver.points}></DriverStanding>)
                             }) 
                             }
-                        </table>
+                        </Table>
                     )
                     break
                     case 'Driver Standings - SILVER':
                         standingsTable = (
-                            <table className="ResultsTable">
+                            <Table className="ResultsTable">
                                 <tr className="ResultsTableHeader">
                                     <td>Position</td>
                                     <td>Driver</td>
@@ -157,12 +158,12 @@ class SeasonStandings extends Component {
                                                                 results={driver['results']} points={driver.points}></DriverStanding>)
                                 }) 
                                 }
-                            </table>
+                            </Table>
                         )
                         break
                 case 'Team Standings': 
                     standingsTable = (
-                        <table className='ResultsTable'>
+                        <Table className='ResultsTable'>
                             <tr className="ResultsTableHeader">
                                 <td>Position</td>
                                 <td>Team</td>
@@ -173,12 +174,12 @@ class SeasonStandings extends Component {
                                         return(<tr><td>{++positionCounter}</td><td>{team['name']}</td><td>{team['points']}</td></tr>)
                                 }) 
                             }
-                        </table>
+                        </Table>
                     )
                     break
                 case 'Team Standings - PRO': 
                     standingsTable = (
-                        <table className='ResultsTable'>
+                        <Table className='ResultsTable'>
                             <tr className="ResultsTableHeader">
                                 <td>Position</td>
                                 <td>Team</td>
@@ -189,12 +190,12 @@ class SeasonStandings extends Component {
                                         return(<tr><td>{++positionCounter}</td><td>{team['name']}</td><td>{team['points']}</td></tr>)
                                 }) 
                             }
-                        </table>
+                        </Table>
                     )
                     break
                 case 'Team Standings - AM': 
                     standingsTable = (
-                        <table className='ResultsTable'>
+                        <Table className='ResultsTable'>
                             <tr className="ResultsTableHeader">
                                 <td>Position</td>
                                 <td>Team</td>
@@ -205,12 +206,12 @@ class SeasonStandings extends Component {
                                         return(<tr><td>{++positionCounter}</td><td>{team['name']}</td><td>{team['points']}</td></tr>)
                                 }) 
                             }
-                        </table>
+                        </Table>
                     )
                     break
                 case 'Team Standings - SILVER': 
                     standingsTable = (
-                        <table className='ResultsTable'>
+                        <Table className='ResultsTable'>
                             <tr className="ResultsTableHeader">
                                 <td>Position</td>
                                 <td>Team</td>
@@ -221,7 +222,7 @@ class SeasonStandings extends Component {
                                         return(<tr><td>{++positionCounter}</td><td>{team['name']}</td><td>{team['points']}</td></tr>)
                                 }) 
                             }
-                        </table>
+                        </Table>
                     )
                     break
             }
