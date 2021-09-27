@@ -42,20 +42,20 @@ export default function Dashboard() {
         return currentUser
     }, []);
 
-    const monzaSignUp = (
+    const zolderSignUp = (
         <div className="container w-75">
-            <h4>8h of Monza</h4>
-            <h4>August 28 - 15:00 CEST</h4>
+            <h4>8h of Zolder</h4>
+            <h4>October 23 - 15:00 CEST</h4>
             <h4 className="mb-4">Team registration</h4>
-            <Endurance_SignUp season="ACC_OneOff_Monza8h" maxDrivers="4"/>
+            <Endurance_SignUp season="ACC_OneOff_8hZolder_Oct23" maxDrivers="4"/>
         </div>)
 
-    const monzaUpdate = (
+    const zolderUpdate = (
         <div className="container w-75">
-            <h4>8h of Monza</h4>
-            <h4>August 28 - 15:00 CEST</h4>
+            <h4>8h of Zolder</h4>
+            <h4>October 23 - 15:00 CEST</h4>
             <h4 className="mb-4">Team update</h4>
-            <Endurance_TeamUpdate season="ACC_OneOff_Monza8h" maxDrivers="4"/>
+            <Endurance_TeamUpdate season="ACC_OneOff_8hZolder_Oct23" maxDrivers="4"/>
         </div>
     )
 
@@ -88,17 +88,26 @@ export default function Dashboard() {
                     <hr/>
                     <Button variant="light outline-primary" className="mt-2 w-100" onClick={() => setComponent('GT3Signup')}><a href='#'>Register for 2021 ISDA GT3 World Challenge - Autumn Season</a></Button>
                     <Button variant="light outline-primary" className="mt-2 w-100"><a href='https://forms.gle/4c3yFp5SehgVerzZ6'>2021 ISDA GT3 World Challenge - Autumn Season - Livery Upload</a></Button>
+                    <hr/>
+                    <Button variant="light outline-primary" className="mt-2 w-100" onClick={() => setComponent('zolderSignUp')}><a href='#'>8h of Zolder - Team Registration</a></Button>
+                    <Button variant="light outline-primary" className="mt-2 w-100" onClick={() => setComponent('zolderUpdate')}><a href='#'>8h of Zolder - Team Update</a></Button>
                 </Navbar>
                 <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4 w-100 mt-4">
                     <div className="w-100">
                         {component==='' && 
                         <div>
                             <h1 className="mt-2 mb-4">Welcome to International Sim Drivers Association!</h1>
-                            <div className="row w-75 ml-auto mr-auto col-md-5">
-                                <div>
+                            <div className="row w-75 ml-auto mr-auto">
+                                <div className="col-md-6">
                                     <Link onClick={() => setComponent('GT3Signup')}>
                                     <img className="img-fluid" alt="ISDA GT3 World Challenge - Autumn Season" src="https://www.isdaracing.com/wp-content/uploads/2021/08/signups_open.png"></img>
                                     <h3 className="mt-2 link">Register for 2021 ISDA GT3 World Challenge - Autumn Season</h3>
+                                    </Link>
+                                </div>
+                                <div className="col-md-6">
+                                    <Link onClick={() => setComponent('zolderSignUp')}>
+                                    <img className="img-fluid" alt="ISDA 8h of Zolder" src="https://www.isdaracing.com/wp-content/uploads/2021/09/zolder1.4.png"></img>
+                                    <h3 className="mt-2 link">Register for 8h of Zolder - October 23rd</h3>
                                     </Link>
                                 </div>
                             </div>
@@ -111,8 +120,8 @@ export default function Dashboard() {
                         {component==='GT3Signup' && <GT3Signup/>}
                         {component==='SignUpList' && <SignUpList/>}
                         {component==='IncidentReportForm' && <IncidentReportForm/>}
-                        {component==='monzaSignUp' && monzaSignUp}
-                        {component==='monzaUpdate' && monzaUpdate}
+                        {component==='zolderSignUp' && zolderSignUp}
+                        {component==='zolderUpdate' && zolderUpdate}
                     </div> 
                 </main>
             </div>
