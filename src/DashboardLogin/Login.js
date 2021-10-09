@@ -7,7 +7,7 @@ import { Link, useHistory } from 'react-router-dom'
 export default function Login() {
     const emailRef = useRef()
     const passwordRef = useRef()
-    const { login, currentUser, setCurrentDriver } = useAuth()
+    const { login, currentUser, setCurrentDriver, setCurrentRole } = useAuth()
     const [error, setError] = useStateIfMounted()
     const [loading, setLoading] = useStateIfMounted(false)
     const history = useHistory()
@@ -37,6 +37,7 @@ export default function Login() {
                 }
                 else {
                     setCurrentDriver(data['driver']['name'])
+                    setCurrentRole(data['driver']['role'])
                     history.push('/')
                 }
             })

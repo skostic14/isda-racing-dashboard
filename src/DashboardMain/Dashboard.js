@@ -10,9 +10,10 @@ import Endurance_TeamUpdate from '../SignUp/Endurance_TeamUpdate.js'
 import GT3Signup from '../SignUp/GT3_Signup.js'
 import SignUpList from '../SignUp/SignupList.js'
 import IncidentReportForm from '../IncidentReports/IncidentReportForm.js'
+import CreateEvent from '../AdminTools/CreateEvent'
 
 export default function Dashboard() {
-    const { currentUser, setCurrentDriver, currentDriver, currentUserToken } = useAuth()
+    const { currentUser, setCurrentDriver, currentDriver, currentUserToken, currentRole, setCurrentRole } = useAuth()
     const [component, setComponent] = useState('')
     const history = useHistory()
 
@@ -36,6 +37,7 @@ export default function Dashboard() {
                 }
                 else {
                     setCurrentDriver(data['driver']['name'])
+                    setCurrentRole(data['driver']['role'])
                 }
             })
         }
@@ -59,6 +61,15 @@ export default function Dashboard() {
         </div>
     )
 
+    let adminToolsDropdown = null
+    if (currentRole === "admin") {
+        adminToolsDropdown = (
+            <NavDropdown title="Admin Tools">
+                <NavDropdown.Item onClick={() => setComponent('CreateEvent')}>Create Event</NavDropdown.Item>
+            </NavDropdown>
+        )
+    }
+
     return (
         <div className="h-100 bg-light">
             <Navbar bg="dark" variant="dark">
@@ -73,6 +84,7 @@ export default function Dashboard() {
                     <Nav.Link onClick={() => setComponent('Calendar')}>Calendar</Nav.Link>
                     <Nav.Link onClick={() => setComponent('SignUpList')}>Entry Lists</Nav.Link>
                     <Nav.Link onClick={() => setComponent('IncidentReportForm')}>Incident report</Nav.Link>
+                    {adminToolsDropdown}
                 </Nav>
                 <Nav className="float-right">
                     <Nav.Link className="mr-auto">{currentDriver}</Nav.Link>
@@ -122,6 +134,7 @@ export default function Dashboard() {
                         {component==='IncidentReportForm' && <IncidentReportForm/>}
                         {component==='zolderSignUp' && zolderSignUp}
                         {component==='zolderUpdate' && zolderUpdate}
+                        {component==='CreateEvent' && <CreateEvent/>}
                     </div> 
                 </main>
             </div>

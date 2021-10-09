@@ -10,6 +10,7 @@ export function useAuth() {
 export function AuthProvider({ children }) {
     const [currentUser, setCurrentUser] = useState()
     const [currentDriver, setCurrentDriver] = useState()
+    const [currentRole, setCurrentRole] = useState()
     const [loading, setLoading] = useState(true)
     const [currentUserToken, setCurrentUserToken] = useState()
 
@@ -22,7 +23,9 @@ export function AuthProvider({ children }) {
         signup,
         login,
         logout,
-        resetPassword
+        resetPassword,
+        currentRole,
+        setCurrentRole
     }
 
     useEffect(() => {
