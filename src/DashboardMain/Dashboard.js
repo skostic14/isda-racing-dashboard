@@ -98,11 +98,9 @@ export default function Dashboard() {
                     <Button variant="light outline-primary" className="mt-2 w-100"><a href='https://www.isdaracing.com'>ISDA Homepage</a></Button>
                     <Button variant="light outline-primary" className="mt-2 w-100"><a href='https://discord.gg/KZqV4Hfb9A'>ISDA Discord</a></Button>
                     <hr/>
-                    <Button variant="light outline-primary" className="mt-2 w-100" onClick={() => setComponent('GT3Signup')}><a href='#'>Register for 2021 ISDA GT3 World Challenge - Autumn Season</a></Button>
-                    <Button variant="light outline-primary" className="mt-2 w-100"><a href='https://forms.gle/4c3yFp5SehgVerzZ6'>2021 ISDA GT3 World Challenge - Autumn Season - Livery Upload</a></Button>
+                    <Button variant="light outline-primary" className="mt-2 w-100" onClick={() => setComponent('GT4Signup')}><a href='#'>Register for 2021 ISDA GT4 World Challenge - Winter Season</a></Button>
+                    <Button variant="light outline-primary" className="mt-2 w-100"><a href='https://forms.gle/GkuZarT362QVHMCr6'>2021 ISDA GT4 World Challenge - Winter Season - Livery Upload</a></Button>
                     <hr/>
-                    <Button variant="light outline-primary" className="mt-2 w-100" onClick={() => setComponent('zolderSignUp')}><a href='#'>3h of Zolder - Team Registration</a></Button>
-                    <Button variant="light outline-primary" className="mt-2 w-100" onClick={() => setComponent('zolderUpdate')}><a href='#'>3h of Zolder - Team Update</a></Button>
                 </Navbar>
                 <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4 w-100 mt-4">
                     <div className="w-100">
@@ -110,16 +108,10 @@ export default function Dashboard() {
                         <div>
                             <h1 className="mt-2 mb-4">Welcome to International Sim Drivers Association!</h1>
                             <div className="row w-75 ml-auto mr-auto">
-                                <div className="col-md-6">
-                                    <Link onClick={() => setComponent('GT3Signup')}>
-                                    <img className="img-fluid" alt="ISDA GT3 World Challenge - Autumn Season" src="https://www.isdaracing.com/wp-content/uploads/2021/08/signups_open.png"></img>
-                                    <h3 className="mt-2 link">Register for 2021 ISDA GT3 World Challenge - Autumn Season</h3>
-                                    </Link>
-                                </div>
-                                <div className="col-md-6">
-                                    <Link onClick={() => setComponent('zolderSignUp')}>
-                                    <img className="img-fluid" alt="ISDA 3h of Zolder" src="https://www.isdaracing.com/wp-content/uploads/2021/09/zolder1.4.png"></img>
-                                    <h3 className="mt-2 link">Register for 3h of Zolder - October 23rd</h3>
+                                <div className="col-md-7 mr-auto ml-auto">
+                                    <Link onClick={() => setComponent('GT4Signup')}>
+                                    <img className="img-fluid" alt="ISDA GT4 World Challenge - Winter Season" src="https://www.isdaracing.com/wp-content/uploads/2021/11/GT4_Banner.png"></img>
+                                    <h3 className="mt-2 link">Register for 2021 ISDA GT4 World Challenge - Winter Season</h3>
                                     </Link>
                                 </div>
                             </div>
@@ -129,7 +121,7 @@ export default function Dashboard() {
                         {component==='RaceResults' && <RaceResults/>}
                         {component==='Calendar' && <Calendar/>}
                         {component==='SeasonStandings' && <SeasonStandings/>}
-                        {component==='GT3Signup' && <GT3Signup/>}
+                        {component==='GT4Signup' && <GT3Signup/>}
                         {component==='SignUpList' && <SignUpList/>}
                         {component==='IncidentReportForm' && <IncidentReportForm/>}
                         {component==='zolderSignUp' && zolderSignUp}
