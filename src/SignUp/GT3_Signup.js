@@ -15,7 +15,7 @@ export default function GT3Signup() {
     const [loading, setLoading] = useState(false)
     const [responseCode, setResponseCode] = useState()
     const history = useHistory()
-    const season='ACC_GT4_S1'
+    const season='ACC_GT3_S3'
 
     useEffect(() => {
         if (currentDriver === undefined || !currentDriver) {
@@ -86,7 +86,7 @@ export default function GT3Signup() {
 
     return (
         <div align="center">
-            <h3 className="text-center mt-4 mb-4">Sign up for 2021 ISDA GT4 World Challenge - Winter Season</h3>
+            <h3 className="text-center mt-4 mb-4">Sign up for 2022 ISDA GT3 World Challenge - Winter Season</h3>
             <Form className="mb-4 w-50" onSubmit={submitCarSelection}>
                 <Form.Group id="car">
                     <Form.Label>Car Type</Form.Label>
