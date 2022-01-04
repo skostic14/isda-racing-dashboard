@@ -104,6 +104,20 @@ export default function GT3Signup() {
             </Form>
             {error && <Alert variant="danger" className="w-50">{error}</Alert>}
             {success && <Alert variant="success" className="w-50">{success}</Alert>}
+            <h5 className="text-left mt-4 mb-4 w-50">
+            Dear driver,
+            <br/><br/>
+            We are a non-profit organisation with no sponsors. We keep the servers, site and pay for commentators thanks to donations and from our own pockets. 
+            <br/>We do our utmost to keep this place awesome, but we need your support to keep this place rolling!
+            <br/><br/>
+            <ul>
+                <li><a href="https://www.patreon.com/isdaracing">Become our Patreon</a></li>
+                <li><a href="https://paypal.me/isdaracing">Donate with PayPal</a></li>
+            </ul>
+            There are also some perks for our donators, check our Discord for more information.
+            <br/><br/>
+            Godspeed!
+            </h5>
         </div>
     )
 }

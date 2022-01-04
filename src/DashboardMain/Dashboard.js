@@ -101,6 +101,9 @@ export default function Dashboard() {
                     <Button variant="light outline-primary" className="mt-2 w-100" onClick={() => setComponent('GT3Signup')}><a href='#'>Register for 2022 ISDA GT3 World Challenge - Winter Season</a></Button>
                     <Button variant="light outline-primary" className="mt-2 w-100"><a href='https://forms.gle/eLF7qjNWX49GMvYg7'>2022 ISDA GT3 World Challenge - Winter Season - Livery Upload</a></Button>
                     <hr/>
+                    <Button variant="light outline-primary" className="mt-2 w-100"><a href='https://www.patreon.com/isdaracing'>Become our Patreon</a></Button>
+                    <Button variant="light outline-primary" className="mt-2 w-100"><a href='https://paypal.me/isdaracing'>Donate with PayPal</a></Button>
+                    <hr/>
                 </Navbar>
                 <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4 w-100 mt-4">
                     <div className="w-100">
