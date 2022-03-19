@@ -98,7 +98,8 @@ export default function Dashboard() {
                     <Button variant="light outline-primary" className="mt-2 w-100"><a href='https://www.isdaracing.com'>ISDA Homepage</a></Button>
                     <Button variant="light outline-primary" className="mt-2 w-100"><a href='https://discord.gg/KZqV4Hfb9A'>ISDA Discord</a></Button>
                     <hr/>
-                    <Button variant="light outline-primary" className="mt-2 w-100" onClick={() => setComponent('GT3Signup')}><a href='#'>Register for ACC - 2022 ISDA Lamborghini SuperTrofeo - Winter Season</a></Button>
+                    <Button variant="light outline-primary" className="mt-2 w-100" onClick={() => setComponent('GT3Signup')}><a href='#'>Register for ACC - 2022 ISDA GT3 World Challenge - Spring Season</a></Button>
+                    <Button variant="light outline-primary" className="mt-2 w-100"><a href='https://forms.gle/bw94efHPfdBMGMYv5'>Livery Upload for GT3 World Challenge - Spring Season</a></Button>
                     <hr/>
                     <Button variant="light outline-primary" className="mt-2 w-100"><a href='https://www.patreon.com/isdaracing'>Become our Patreon</a></Button>
                     <Button variant="light outline-primary" className="mt-2 w-100"><a href='https://paypal.me/isdaracing'>Donate with PayPal</a></Button>
@@ -112,8 +113,8 @@ export default function Dashboard() {
                             <div className="row w-75 ml-auto mr-auto">
                                 <div className="col-md-7 mr-auto ml-auto">
                                     <Link onClick={() => setComponent('GT3Signup')}>
-                                    <img className="img-fluid" alt="ACC - 2022 ISDA Lamborghini SuperTrofeo - Winter Season" src="https://www.isdaracing.com/wp-content/uploads/2022/02/STCup.png"></img>
-                                    <h3 className="mt-2 link">Register for ACC - 2022 ISDA Lamborghini SuperTrofeo - Winter Season</h3>
+                                    <img className="img-fluid" alt="ACC - 2022 ISDA GT3 World Challenge - Spring Season" src="https://www.isdaracing.com/wp-content/uploads/2022/03/gt3spring.png"></img>
+                                    <h3 className="mt-2 link">Register for ACC - 2022 ISDA GT3 World Challenge - Spring Season</h3>
                                     </Link>
                                 </div>
                             </div>
