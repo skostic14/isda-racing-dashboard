@@ -15,7 +15,7 @@ export default function GT3Signup() {
     const [loading, setLoading] = useState(false)
     const [responseCode, setResponseCode] = useState()
     const history = useHistory()
-    const season='ACC_PCup_S2'
+    const season='ACC_FCL_S1'
 
     useEffect(() => {
         if (currentDriver === undefined || !currentDriver) {
@@ -86,7 +86,7 @@ export default function GT3Signup() {
 
     return (
         <div align="center">
-            <h3 className="text-center mt-4 mb-4">Sign up for ACC - 2022 ISDA Porsche Cup Challenge - Summer Season</h3>
+            <h3 className="text-center mt-4 mb-4">Sign up for ACC - 2022 ISDA Ferrari Challenge USA - Summer Season</h3>
             <Form className="mb-4 w-50" onSubmit={submitCarSelection}>
                 <Form.Group id="car">
                     <Form.Label>Car Type</Form.Label>
