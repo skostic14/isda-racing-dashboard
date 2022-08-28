@@ -14,12 +14,16 @@ class SeasonStandings extends Component {
             'team_standings': [],
             'races': [],
             'display': 'teams',
-            'isMulticlass': false
+            'isMulticlass': false,
+            'preselect_season': props.season
         }
     }
 
     componentDidMount() {
         this.getAvailableSeasons();
+        if (this.state.preselect_season != null) {
+            this.getSeasonResults({'value': this.state.preselect_season})
+        }
     }
 
     getAvailableSeasons = () => {
@@ -38,8 +42,6 @@ class SeasonStandings extends Component {
                     multiclass = false
                 }
                 this.setState({driver_standings: data['driver_standings'], races: data['races'], team_standings: data['team_standings'], isMulticlass: multiclass})
-
-                console.log(this.state.driver_standings)
             });
     }
 
@@ -67,7 +69,6 @@ class SeasonStandings extends Component {
         let standingsTable = null;
         if (true) {
             let positionCounter = 0;
-            console.log(this.state.display)
             switch (this.state.display) {
                 case 'Driver Standings': 
                     standingsTable = (
@@ -231,7 +232,6 @@ class SeasonStandings extends Component {
         let availableStandingsArray = [];
 
         if (this.state.isMulticlass) {
-            console.log(this.state.driver_standings)
             if (this.state.driver_standings['pro']) {
                 availableStandingsArray.push(
                     {
@@ -313,7 +313,7 @@ class SeasonStandings extends Component {
 
         return (
             <div className="RaceResults">
-                {availableSeasons}
+                {!(this.state.preselect_season) && availableSeasons}
                 {standingsSelect}
                 {standingsTable}
             </div>

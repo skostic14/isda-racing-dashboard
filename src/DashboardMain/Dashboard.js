@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Button, Navbar, Nav, NavDropdown } from 'react-bootstrap'
+import { Button, Navbar, Nav, NavDropdown, Stack, Row, Carousel } from 'react-bootstrap'
 import { useAuth } from '../Authentication/AuthContext'
 import { Link, useHistory } from 'react-router-dom'
 import RaceResults from '../RaceResults/RaceResults.js'
@@ -11,17 +11,48 @@ import GT3Signup from '../SignUp/GT3_Signup.js'
 import SignUpList from '../SignUp/SignupList.js'
 import IncidentReportForm from '../IncidentReports/IncidentReportForm.js'
 import CreateEvent from '../AdminTools/CreateEvent'
+import SeasonCard from '../Season/SeasonCard'
+import SeasonHub from '../Season/SeasonHub'
 
 export default function Dashboard() {
-    const { currentUser, setCurrentDriver, currentDriver, currentUserToken, currentRole, setCurrentRole } = useAuth()
+    const { currentUser, setCurrentUser, setCurrentDriver, currentDriver, currentUserToken, currentRole, setCurrentRole } = useAuth()
     const [component, setComponent] = useState('')
+    const [activeSeasons, setActiveSeasons] = useState([])
+    const [pastSeasons, setPastSeasons] = useState([])
     const history = useHistory()
 
+    function fetchActiveSeasons() {
+        fetch('https://backend.isdaracing.com/get_active_seasons')
+        .then( response => response.json() )
+        .then ( data => {
+            setActiveSeasons(data['seasons'])
+        })
+    }
+
+    function fetchPastSeasons() {
+        fetch('https://backend.isdaracing.com/get_past_seasons')
+        .then( response => response.json() )
+        .then ( data => {
+            setPastSeasons(data['seasons'])
+        })
+    }
+
     useEffect(() => {
-        if (!(currentUser && currentUser !== undefined)) {
+        fetchActiveSeasons()
+        fetchPastSeasons()
+        let currentUserLocalStorage = JSON.parse(localStorage.getItem("ISDA_USER"))
+        let currentDriverLocalStorage = localStorage.getItem("ISDA_DRIVER")
+        if (!(currentUser && currentUser !== null)) {
+            setCurrentUser(currentUserLocalStorage)
+        }
+        if (currentDriver === null) {
+            setCurrentDriver(currentDriverLocalStorage)
+        }
+
+        if (!(currentUser && currentUser !== null)) {
             history.push('/login')
         }
-        else if (currentDriver === undefined) {
+        else if (currentDriver === null) {
             const tokenData = {'token': currentUserToken}
             fetch('https://backend.isdaracing.com/check_uid', {
                 method: 'POST',
@@ -37,29 +68,15 @@ export default function Dashboard() {
                 }
                 else {
                     setCurrentDriver(data['driver']['name'])
+                    localStorage.setItem("ISDA_DRIVER", data['driver']['name'])
                     setCurrentRole(data['driver']['role'])
+                    localStorage.setItem("ISDA_ROLE", data['driver']['role'])
                 }
             })
         }
+
         return currentUser
     }, []);
-
-    const zolderSignUp = (
-        <div className="container w-75">
-            <h4>3h of Zolder</h4>
-            <h4>October 23 - 17:00 CEST</h4>
-            <h4 className="mb-4">Team registration</h4>
-            <Endurance_SignUp season="ACC_OneOff_8hZolder_Oct23" maxDrivers="2"/>
-        </div>)
-
-    const zolderUpdate = (
-        <div className="container w-75">
-            <h4>3h of Zolder</h4>
-            <h4>October 23 - 17:00 CEST</h4>
-            <h4 className="mb-4">Team update</h4>
-            <Endurance_TeamUpdate season="ACC_OneOff_8hZolder_Oct23" maxDrivers="4"/>
-        </div>
-    )
 
     let adminToolsDropdown = null
     if (currentRole === "admin") {
@@ -69,6 +86,80 @@ export default function Dashboard() {
             </NavDropdown>
         )
     }
+
+    let activeSeasonsCards = []
+    let pastSeasonsCards = []
+    let seasonsHubs = {}
+    
+
+    function setComponentOfSeason(seasonId) {
+        setComponent(seasonId);
+    }
+
+    activeSeasons.map((season) => {
+        activeSeasonsCards.push(
+            <SeasonCard active={true} seasonId={season.id} friendlyName={season.friendly_name} description={season.description} bannerLink={season.banner_link} callbackFn={() => setComponentOfSeason(season.id)} simulator={season.simulator}></SeasonCard>
+        )
+        seasonsHubs[season.id] = <SeasonHub season={season} active={true} />
+    })
+
+    pastSeasons.map((season) => {
+        pastSeasonsCards.push(
+            <SeasonCard active={false} seasonId={season.id} friendlyName={season.friendly_name} description={season.description} bannerLink={season.banner_link} callbackFn={() => setComponentOfSeason(season.id)} simulator={season.simulator}></SeasonCard>
+        )
+        seasonsHubs[season.id] = <SeasonHub season={season} active={false} />
+    })
+
+    function getActiveComponent() {
+        if (component === '') {
+            return (
+                <div>
+                    <h1 className="mt-2 mb-4">Welcome to International Sim Drivers Association!</h1>
+                    <h3>Currently Active Seasons</h3>
+                    <Row xs={1} md={4} className="g-4 center ml-auto w-100">
+                        {activeSeasonsCards}
+                    </Row>
+                    <hr/>
+                    <h5 className="mt-3">Please note that the dashboard is in development and that features will be gradually added.</h5>
+                    <h5>For more information about dashboard updates, keep an eye on our Discord!</h5>
+                    <hr/>
+                    <h4>Past Seasons</h4>
+                    <Row xs={1} md={5} className="ml-auto w-100 scroll">
+                        {pastSeasonsCards}
+                    </Row>
+                </div>
+            )
+        }
+
+        if (component === 'RaceResults') {
+            return (<RaceResults/>)
+        }
+
+        if (component === 'Calendar') {
+            return (<Calendar/>)
+        }
+
+        if (component === 'SeasonStandings') {
+            return (<SeasonStandings/>)
+        }
+
+        if (component === 'SignUpList') {
+            return (<SignUpList/>)
+        }
+
+        if (component === 'IncidentReportForm') {
+            return (<IncidentReportForm/>)
+        }
+
+        if (component === 'CreateEvent') {
+            return (<CreateEvent/>)
+        }
+
+        if (component in seasonsHubs) {
+            return seasonsHubs[component]
+        }
+    }
+
 
     return (
         <div className="h-100 bg-light">
@@ -109,29 +200,9 @@ export default function Dashboard() {
                 </Navbar>
                 <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4 w-100 mt-4">
                     <div className="w-100">
-                        {component==='' && 
-                        <div>
-                            <h1 className="mt-2 mb-4">Welcome to International Sim Drivers Association!</h1>
-                            <div className="row w-75 ml-auto mr-auto">
-                                <div className="col-md-7 mr-auto ml-auto">
-                                    {/*<Link onClick={() => setComponent('GT3Signup')}>*/}
-                                    <img className="img-fluid" alt="ACC - 2022 ISDA Ferrari Challenge USA - Summer Season" src="https://www.isdaracing.com/wp-content/uploads/2021/01/cropped-ISDA-LOGO.png"></img>
-                                    <h3 className="mt-2 link">Keep an eye on our Discord for the upcoming season!</h3>
-                                    {/*</Link>*/}
-                                </div>
-                            </div>
-                            <h5 className="mt-3">Please note that the dashboard is in development and that features will be gradually added.</h5>
-                            <h5>For more information about dashboard updates, keep an eye on our Discord!</h5>
-                        </div>}
-                        {component==='RaceResults' && <RaceResults/>}
-                        {component==='Calendar' && <Calendar/>}
-                        {component==='SeasonStandings' && <SeasonStandings/>}
-                        {component==='GT3Signup' && <GT3Signup/>}
-                        {component==='SignUpList' && <SignUpList/>}
-                        {component==='IncidentReportForm' && <IncidentReportForm/>}
-                        {component==='zolderSignUp' && zolderSignUp}
-                        {component==='zolderUpdate' && zolderUpdate}
-                        {component==='CreateEvent' && <CreateEvent/>}
+                        {
+                            getActiveComponent()
+                        }
                     </div> 
                 </main>
             </div>

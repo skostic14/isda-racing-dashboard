@@ -11,12 +11,16 @@ class RaceResults extends Component {
         this.state = {
             'available_race_results': [],
             'current_race_data': {},
-            'results': []
+            'results': [],
+            'preselectRace': props.race
         }
     }
 
     componentDidMount() {
         this.getAvailableRaceResults();
+        if (this.state.preselectRace != null) {
+            this.getRaceResults({'value': this.state.preselectRace})
+        }
     }
 
     getAvailableRaceResults = () => {
@@ -81,7 +85,7 @@ class RaceResults extends Component {
 
         return (
             <div className="RaceResults">
-                {availableRaceResults}
+                {!(this.state.preselectRace) && availableRaceResults}
                 {raceResultsTable}
             </div>
         )

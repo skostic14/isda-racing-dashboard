@@ -37,7 +37,9 @@ export default function Login() {
                 }
                 else {
                     setCurrentDriver(data['driver']['name'])
+                    localStorage.setItem("ISDA_DRIVER", data['driver']['name'])
                     setCurrentRole(data['driver']['role'])
+                    localStorage.setItem("ISDA_ROLE", data['driver']['role'])
                     history.push('/')
                 }
             })

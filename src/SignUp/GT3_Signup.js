@@ -1,27 +1,46 @@
-import React, { useRef, useState, useEffect } from 'react'
+import React, { Component } from 'react'
 import Select from 'react-select'
 import { Form, Button, Alert } from 'react-bootstrap'
-import { useAuth } from '../Authentication/AuthContext'
-import { useHistory } from 'react-router-dom'
 
-export default function GT3Signup() {
-    const teamNameRef = useRef()
-    const carNumberRef = useRef()
-    const { currentUser, currentDriver } = useAuth()
-    const [error, setError] = useState()
-    const [success, setSuccess] = useState()
-    const [carOptions, setCarOptions] = useState()
-    const [car, setCar] = useState()
-    const [loading, setLoading] = useState(false)
-    const [responseCode, setResponseCode] = useState()
-    const history = useHistory()
-    const season='ACC_FCL_S1'
-
-    useEffect(() => {
-        if (currentDriver === undefined || !currentDriver) {
-            history.push('/login')
+class GT3Signup extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            'seasonId': props.seasonId,
+            'seasonFriendlyName': props.seasonFriendlyName,
+            'error': '',
+            'success': '',
+            'carOptions': [],
+            'loading': false,
+            'responseCode': 200
         }
-        fetch('https://backend.isdaracing.com/get_car_options?season=' + season)
+    }
+
+    setError = (error) => {
+        this.setState({error: error})
+    }
+
+    setSuccess = (success) => {
+        this.setState({success: success})
+    }
+
+    setCarOptions = (carOptions) => {
+        this.setState({carOptions: carOptions})
+    }
+
+    setLoading = (isLoading) => {
+        this.setState({loading: isLoading})
+    }
+
+    setResponseCode = (responseCode) => {
+        this.setState({responseCode: responseCode})
+    }
+
+    componentDidMount() {
+        /*if (currentDriver === undefined || !currentDriver) {
+            this.history.push('/login')
+        }*/
+        fetch('https://backend.isdaracing.com/get_car_options?season=' + this.state.seasonId)
         .then( response => response.json())
         .then( data => {
             let carSelectOptions = [];
@@ -31,79 +50,79 @@ export default function GT3Signup() {
                     label: car['friendly_name']
                 })
             })
-            setCarOptions(carSelectOptions)
+            this.setCarOptions(carSelectOptions)
         });
-        return currentUser
-    }, []);
+    }
 
-    function submitCarSelection(e) {
+    submitCarSelection = (e) => {
         e.preventDefault()
 
-        if (carNumberRef.current.value < 1 || carNumberRef.current.value > 999) {
-            return(setError('Car number must be between 1 and 999'))
+        if (this.carNumberRef.current.value < 1 || this.carNumberRef.current.value > 999) {
+            return(this.setError('Car number must be between 1 and 999'))
         }
 
-        if (car === undefined || car === '') {
-            return(setError('Please select a car'))
+        if (this.car === undefined || this.car === '') {
+            return(this.setError('Please select a car'))
         }
         
         try {
-            setError('')
-            setSuccess('')
-            setLoading(true)
+            this.setError('')
+            this.setSuccess('')
+            this.setLoading(true)
             fetch('https://backend.isdaracing.com/team_signup', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    'season': season,
-                    'car': car,
-                    'car_number': carNumberRef.current.value,
-                    'teamname': teamNameRef.current.value,
+                    'season': this.state.season,
+                    'car': this.state.car,
+                    'car_number': this.state.carNumberRef.current.value,
+                    'teamname': this.state.teamNameRef.current.value,
                     'drivers': [
-                        currentDriver
+                        this.state.currentDriver
                     ]
                 })
             })
             .then(response => {
-                setResponseCode(response.status)
+                this.setResponseCode(response.status)
                 return response.json()
             })
             .then(data => {
-                if (responseCode === 200 ) {
-                    setSuccess('Team registered successfully')
+                if (this.state.responseCode === 200 ) {
+                    this.setSuccess('Team registered successfully')
                 }
                 else {
-                    setError(data['message'])
+                    this.setError(data['message'])
                 }
             })
         } catch {
-            setError('Failed to register for the season')
+            this.setError('Failed to register for the season')
         }
-        setLoading(false) 
+        this.setLoading(false) 
     }
 
-    return (
+    render() {
+        return(
         <div align="center">
-            <h3 className="text-center mt-4 mb-4">Sign up for ACC - 2022 ISDA Ferrari Challenge USA - Summer Season</h3>
-            <Form className="mb-4 w-50" onSubmit={submitCarSelection}>
+            <h3 className="text-center mt-4 mb-4">Sign up for {this.state.seasonFriendlyName}</h3>
+            <Form className="mb-4 w-50" onSubmit={this.submitCarSelection}>
                 <Form.Group id="car">
                     <Form.Label>Car Type</Form.Label>
-                    <Select className="CarSelect" options={carOptions} onChange={(selectedCar) => setCar(selectedCar.value)} placeholder="Select car"/>
+                    <Select className="CarSelect" options={this.state.carOptions} onChange={(selectedCar) => this.setCar(selectedCar.value)} placeholder="Select car"/>
                 </Form.Group>
                 <Form.Group id="number">
                     <Form.Label>Car Number</Form.Label>
-                    <Form.Control type="number" ref={carNumberRef} required></Form.Control>
+                    <Form.Control type="number" ref={this.state.carNumberRef} required></Form.Control>
                 </Form.Group>
                 <Form.Group id="teamname">
                     <Form.Label>Team Name</Form.Label>
-                    <Form.Control type="text" ref={teamNameRef} required></Form.Control>
+                    <Form.Control type="text" ref={this.state.teamNameRef} required></Form.Control>
                 </Form.Group>
-                <Button type="submit" disabled={loading}>Submit</Button>
+                <Button type="submit" disabled={this.state.loading}>Submit</Button>
             </Form>
-            {error && <Alert variant="danger" className="w-50">{error}</Alert>}
-            {success && <Alert variant="success" className="w-50">{success}</Alert>}
+            {this.state.error && <Alert variant="danger" className="w-50">{this.state.error}</Alert>}
+            {this.state.success && <Alert variant="success" className="w-50">{this.state.success}</Alert>}
             <h5 className="text-left mt-4 mb-4 w-50">
             Dear driver,
             <br/><br/>
@@ -119,5 +138,8 @@ export default function GT3Signup() {
             Godspeed!
             </h5>
         </div>
-    )
+        )
+    }
 }
+
+export default GT3Signup;

@@ -8,9 +8,14 @@ export function useAuth() {
 }
 
 export function AuthProvider({ children }) {
-    const [currentUser, setCurrentUser] = useState()
-    const [currentDriver, setCurrentDriver] = useState()
-    const [currentRole, setCurrentRole] = useState()
+
+    const localStorageUser = JSON.parse(localStorage.getItem("ISDA_USER"))
+    const localStorageDriver = localStorage.getItem("ISDA_DRIVER")
+    const localStorageRole = localStorage.getItem("ISDA_ROLE")
+
+    const [currentUser, setCurrentUser] = useState(localStorageUser)
+    const [currentDriver, setCurrentDriver] = useState(localStorageDriver)
+    const [currentRole, setCurrentRole] = useState(localStorageRole)
     const [loading, setLoading] = useState(true)
     const [currentUserToken, setCurrentUserToken] = useState()
 
@@ -34,6 +39,7 @@ export function AuthProvider({ children }) {
             if (user) {
                 user.getIdToken().then(token => {
                     setCurrentUserToken(token)
+                    localStorage.setItem("ISDA_USER", JSON.stringify(user))
                 })
             }
             setLoading(false)
@@ -51,6 +57,7 @@ export function AuthProvider({ children }) {
             setCurrentUser(userCredential.user)
             userCredential.user.getIdToken().then(token => {
                 setCurrentUserToken(token)
+                localStorage.setItem("ISDA_USER", JSON.stringify(userCredential.user))
                 callback(token)
             })
         }).catch(e => {
@@ -65,6 +72,7 @@ export function AuthProvider({ children }) {
 
     function logout() {
         setCurrentUserToken(0)
+        localStorage.clear()
         return auth.signOut()
     }
 
