@@ -12,7 +12,11 @@ class GT3Signup extends Component {
             'success': '',
             'carOptions': [],
             'loading': false,
-            'responseCode': 200
+            'responseCode': 200,
+            'car': '',
+            'carNumber': '',
+            'teamName': '',
+            'currentDriver': localStorage.getItem("ISDA_DRIVER")
         }
     }
 
@@ -36,10 +40,24 @@ class GT3Signup extends Component {
         this.setState({responseCode: responseCode})
     }
 
+    setCar = (car) => {
+        this.setState({car: car})
+    }
+
+    setCarNumber = (carNumber) => {
+        this.setState({carNumber: carNumber})
+    }
+
+    setTeamName = (teamName) => {
+        this.setState({teamName: teamName})
+    }
+
+    setDriverName = (driverName) => {
+        this.setState({driverName: driverName})
+    }
+
     componentDidMount() {
-        /*if (currentDriver === undefined || !currentDriver) {
-            this.history.push('/login')
-        }*/
+
         fetch('https://backend.isdaracing.com/get_car_options?season=' + this.state.seasonId)
         .then( response => response.json())
         .then( data => {
@@ -57,14 +75,14 @@ class GT3Signup extends Component {
     submitCarSelection = (e) => {
         e.preventDefault()
 
-        if (this.carNumberRef.current.value < 1 || this.carNumberRef.current.value > 999) {
+        if (this.state.carNumber < 1 || this.state.carNumber > 999) {
             return(this.setError('Car number must be between 1 and 999'))
         }
 
-        if (this.car === undefined || this.car === '') {
+        if (this.state.car === undefined || this.state.car === '') {
             return(this.setError('Please select a car'))
         }
-        
+
         try {
             this.setError('')
             this.setSuccess('')
@@ -75,10 +93,10 @@ class GT3Signup extends Component {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    'season': this.state.season,
+                    'season': this.state.seasonId,
                     'car': this.state.car,
-                    'car_number': this.state.carNumberRef.current.value,
-                    'teamname': this.state.teamNameRef.current.value,
+                    'car_number': this.state.carNumber,
+                    'teamname': this.state.teamName,
                     'drivers': [
                         this.state.currentDriver
                     ]
@@ -113,11 +131,11 @@ class GT3Signup extends Component {
                 </Form.Group>
                 <Form.Group id="number">
                     <Form.Label>Car Number</Form.Label>
-                    <Form.Control type="number" ref={this.state.carNumberRef} required></Form.Control>
+                    <Form.Control type="number" value={this.state.carNumber} onChange={(number) => this.setCarNumber(number.target.value)} required></Form.Control>
                 </Form.Group>
                 <Form.Group id="teamname">
                     <Form.Label>Team Name</Form.Label>
-                    <Form.Control type="text" ref={this.state.teamNameRef} required></Form.Control>
+                    <Form.Control type="text" value={this.state.teamName} onChange={(teamName) => this.setTeamName(teamName.target.value)} required></Form.Control>
                 </Form.Group>
                 <Button type="submit" disabled={this.state.loading}>Submit</Button>
             </Form>

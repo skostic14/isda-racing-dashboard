@@ -148,7 +148,7 @@ class EnduranceTeamSignUp extends Component {
 
         if (this.state.carOptions.length === 1) {
             carSelect = (<p>{this.state.carOptions[0].friendly_name}</p>);
-            this.state.car = this.state.carOptions[0].id
+            this.setState({car: this.state.carOptions[0].id})
         }
         else if (this.state.carOptions.length > 1) {
             let carOptions = [];
@@ -161,7 +161,6 @@ class EnduranceTeamSignUp extends Component {
             carSelect = (<Select className="CarSelect" options={carOptions} onChange={this.handleCarSelect} placeholder="Select car"/>);
         }
 
-        let driverSelect = [];
         let driverOptions = [];
         if (this.state.driverList.length > 0) {
             this.state.driverList.map((driver) => {
@@ -170,10 +169,8 @@ class EnduranceTeamSignUp extends Component {
                         label: driver['real_name']
                 })
             });
-            driverSelect = (<Select className="DriverSelect" options={driverOptions} placeholder="Select driver"/>);
         }
 
-        let seasonSelect = [];
         if (this.state.availableSeasons.length > 0) {
             let availableSeasons = []
             this.state.availableSeasons.map((season) => {
