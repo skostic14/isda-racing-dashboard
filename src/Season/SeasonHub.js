@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Tab, Tabs, Row, Col, Image, Table } from 'react-bootstrap';
+import {Tab, Tabs, Row, Col, Image, Table, Button } from 'react-bootstrap';
 import GT3Signup from '../SignUp/GT3_Signup';
 import EnduranceTeamSignUp from '../SignUp/Endurance_SignUp';
 import EnduranceTeamUpdate from '../SignUp/Endurance_TeamUpdate';
@@ -40,7 +40,8 @@ class SeasonHub extends Component {
                 ),
                 (
                 <Tab eventKey="liveryUpload" title="Upload Livery!">
-                    <iframe src={this.state.seasonContainer['livery_upload_link']} className="w-50" style={{height: "40rem"}}/>
+                    <h4>To upload the livery, please follow the link below. It will take you to a dedicated Google Form in a new tab.</h4>
+                <a href={this.state.seasonContainer['livery_upload_link']} target="_blank" rel="noreferrer"><Button variant="primary" className="mt-2 w-25">Livery Upload</Button></a>
                 </Tab>
                 )
             ]
@@ -58,7 +59,8 @@ class SeasonHub extends Component {
             ),
             (
             <Tab eventKey="liveryUpload" title="Upload Livery!">
-                <iframe src={this.state.seasonContainer['livery_upload_link']} className="w-50" style={{height: "40rem"}}/>
+                <h4>To upload the livery, please follow the link below. It will take you to a dedicated Google Form in a new tab.</h4>
+                <a href={this.state.seasonContainer['livery_upload_link']} target="_blank" rel="noreferrer"><Button variant="primary" className="mt-2 w-25">Livery Upload</Button></a>
             </Tab>
             )
         ]
